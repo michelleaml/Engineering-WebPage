@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.masthead {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* background-position: 20px 10%; */
+  background-attachment: fixed;
+  min-height: 90vh;
+  position: relative;
+  color: white;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +47,9 @@
     transform: rotate(360deg);
   }
 }
+
+/* @media (max-width: 768px){
+  .masthead{
+    min-height: 60vh;
+  }
+} */
