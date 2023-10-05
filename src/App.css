@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .App-logo {
@@ -28,16 +30,16 @@
   color: #61dafb;
 }
 
-.masthead {
+/* .masthead {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  /* background-position: 20px 10%; */
+  background-position: 20px 10%;
   background-attachment: fixed;
   min-height: 90vh;
   position: relative;
   color: white;
-}
+} */
 
 @keyframes App-logo-spin {
   from {
@@ -53,3 +55,256 @@
     min-height: 60vh;
   }
 } */
+
+.card {
+  align-items: center;
+  justify-content: center;
+  background-color: lightgrey;
+  border: 5px solid black
+
+}
+
+#columnas{
+  column-count:1;
+  column-gap:20px;
+  list-style: none;
+}
+
+@media (min-width: 992px) {
+  .col-md-border:not(:last-child) {
+      border-right: 1px solid #f4c418;
+  }
+  .col-md-border + .col-md-border {
+      border-left: 1px solid #f4c418;
+      margin-left: -1px;
+  }
+}
+
+.carousel .carousel-item {
+  height: 500px;
+}
+
+.carousel-item img {
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  min-height: 500px;
+}
+
+
+.contact-container {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 20px;
+}
+
+.contact-container h2 {
+  margin: 10px 0;
+}
+
+.contact-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Agregado */
+  justify-content: center;
+}
+
+.contact-container li {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+.contact-container a {
+  display: block;
+}
+
+.contact-section {
+  display: flex;
+}
+
+.redes-sociales img {
+  width: 100px;
+  height: 100px;
+}
+
+.contact-container p {
+  margin-right: 20px;
+}
+
+
+
+#columnas{
+  column-count:1;
+  column-gap:30px;
+  list-style: none;
+  
+}
+
+@media (min-width: 992px) {
+  .col-md-border:not(:last-child) {
+      border-right: 1px solid #f4c418;
+  }
+  .col-md-border + .col-md-border {
+      border-left: 1px solid #f4c418;
+      margin-left: -1px;
+  }
+}
+
+.carousel .carousel-item {
+  height: 500px;
+}
+
+.carousel-item img {
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  min-height: 500px;
+}
+
+
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 0 20px;
+}
+
+.contact-container h2 {
+  margin: 10px 0;
+}
+
+.contact-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex; /* Agregado */
+  justify-content: center;
+}
+
+.contact-container li {
+  margin-top: 5px;
+  margin-right: 10px;
+}
+
+
+.contact-container a {
+  display: block;
+}
+
+.contact-section {
+  display: flex;
+}
+
+.redes-sociales img {
+  width: 100px;
+  height: 100px;
+}
+
+.contact-container p {
+  margin-right: 20px;
+}
+
+.google-map {
+  padding-bottom: 50%;
+  position: relative;
+}
+
+.google-map iframe {
+  height: 100%;
+  width: 102vh;
+  left: 0;
+  top: 0;
+  position: absolute;
+}
+
+body{
+  font-family: 'Roboto', sans-serif;;
+}
+/* Textos prinicpales */
+.info-presentacion{
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.info-principal{
+  font-weight: 300;
+  font-size: 30px;
+  color: black;
+}
+.info-lugar{
+  font-weight: 300;
+  font-size: 28px;
+  color: rgb(0, 0, 0);
+}
+.info-lugar-titulo{
+  font-weight: 600;
+  font-size: 38px;
+  color: rgb(0, 0, 0);
+}
+.info-evento-pasado{
+  font-weight: 300;
+  font-size: 30px;
+  color: black;
+}
+.info-inv{
+  font-weight: 600;
+  font-size: 36px;
+}
+.info-titulo-footer{
+  font-weight: 600;
+  font-size: 2rem;
+}
+.info-titulo{
+  font-weight: 600;
+  font-size: 2.5rem;
+}
+.titulo-staff{
+  font-weight: 600;
+  font-size: 1.4girem;
+}
+
+
+/* seccion preguntas footer */
+.fa-facebook,.fa-whatsapp,.fa-instagram,.fa-envelope {
+  font-size: 3rem; 
+  color: black; 
+}
+
+.navbar{
+  padding: 10rem;
+  
+}   
+.navbar a{
+  font-size: 20px;
+  font-weight: 300px;
+}  
+
+.navbar-collapse {
+  align-items: center;
+  justify-content: space-between;
+
+}
+@media screen and (max-width: 767px) {
+  .navbar-brand{
+      display: none;
+  }
+  
+}
+#columnas li{
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 300px;
+
+}
