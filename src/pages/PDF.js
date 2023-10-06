@@ -64,7 +64,7 @@ function PDFViewer() {
             <br></br>
             <h4>View PDF</h4>
             <div className='pdf-container'>
-                {viewPdf&&<><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.6.347/build/pdf.worker.min.js">
+                {viewPdf&&<><Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
                     <Viewer fileUrl={viewPdf}
                         plugins={[defaultLayoutPluginInstance]}/>
                     </Worker></>}
