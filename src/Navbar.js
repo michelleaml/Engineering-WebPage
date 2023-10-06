@@ -12,6 +12,7 @@ function PrincipalNavegationBar() {
             <Nav.Link href="#home">CONÓCENOS</Nav.Link>
             <Nav.Link href="#features">EVENTOS</Nav.Link>
             <Nav.Link href="#pricing">LABORATORIO</Nav.Link>
+            <Nav.Link href="#costs">PDF</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

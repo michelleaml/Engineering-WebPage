@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Switch, Route, Link} from 'react-route
 import EXPOIng from './pages/EXPO-Ingenieria';
 import Laboratorio from './pages/Laboratorio';
 import Conocenos from './pages/Conocenos';
+import PDFViewer from './pages/PDF';
 
 function PrincipalNavBarDropdown() {
   return (
@@ -33,6 +34,7 @@ function PrincipalNavBarDropdown() {
               </NavDropdown.Item> */}
             </NavDropdown>
             <Nav.Link as={Link} to={"/laboratorio"}>LABORATORIO</Nav.Link>
+            <Nav.Link as={Link} to={"/PDF"}>PDF</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -43,6 +45,7 @@ function PrincipalNavBarDropdown() {
         <Route path="/conocenos" element={<Conocenos />}/>
         <Route path="/eventos/expo-ingenierias" element={<EXPOIng />}/>
         <Route path="/laboratorio" element={<Laboratorio />}/>
+        <Route path="/PDF" element={<PDFViewer />}/>
       </Routes>
       {/* </Switch> */}
     </div>

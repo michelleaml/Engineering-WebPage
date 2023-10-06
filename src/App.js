@@ -7,6 +7,7 @@ import NavBarDropdown from './NavBarDropdown.js'
 
 // import Button from 'react-bootstrap/Button' //importa el boton con ese cc
 import {Button, Alert, Breadcrumb} from 'react-bootstrap' // importa toda la libreria
+import PDFViewer from './pages/PDF';
 
 function App() {
   return (
