@@ -15,13 +15,10 @@ def create_main_tables(db):
         cursor.execute(sq_query)
         print("SQLite Database version:", cursor.fetchall())
 
-        # members and their info are going to be separated by commas such as:
-        #   Daniel Cruz, t031044, ICC, David Roldan, ...
-        #   Perhaps add a separator between member such as &:
-        #   Daniel Cruz, t031044, ICC&David Roldan, ...
-
-        # classes are also going to be separated by a comma, such as:
-        #   Math, Phisics, ...
+        # Members and their info are going to be separated by a separator between member such as &:
+        #      Daniel Cruz, t031044, ICC&David Roldan, ...
+        # Classes are also going to be separated by a comma, such as:
+        #      Math, Phisics, ...
         create_query = """CREATE TABLE teams(
         id INTEGER NOT NULL,
         name TEXT NOT NULL,
@@ -73,7 +70,7 @@ def create_main_tables(db):
 
 
 def main():
-    db = "test.db"
+    db = "test1.sqlite"
     create_main_tables(db)
     input_data.main(db)
 
