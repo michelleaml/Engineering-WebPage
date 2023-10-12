@@ -1,10 +1,12 @@
 import React, { Component } from "react";
+import PDFViewer from './PDF';
+
 
 class Layout extends Component {
   render() {
     return (
       <div>
-        <h1> Layout </h1>
+        <PDFViewer />
       </div>
     );
   }
