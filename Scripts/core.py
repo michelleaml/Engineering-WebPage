@@ -23,6 +23,7 @@ def create_main_tables(db):
         id INTEGER NOT NULL,
         name TEXT NOT NULL,
         category TEXT NOT NULL,
+        modality TEXT NOT NULL,
         members TEXT NOT NULL,
         description TEXT NOT NULL,
         classes TEXT NOT NULL
@@ -70,7 +71,7 @@ def create_main_tables(db):
 
 
 def main():
-    db = "test1.sqlite"
+    db = "test.sqlite"
     create_main_tables(db)
     input_data.main(db)
 
