@@ -99,11 +99,12 @@ def into_main_tables(db):
                 counter += 1
                 # [0][name,
                 # [1] category,
-                # [2] member's names,
-                # [3] member's ids,
-                # [4] member's careers,
-                # [5] Description,
-                # [6] Classes]
+                # [2] modality,
+                # [3] member's names,
+                # [4] member's ids,
+                # [5] member's careers,
+                # [6] Description,
+                # [7] Classes]
                 members = ""
                 names = row[2].split(",")
                 ids = row[3].split(",")
@@ -111,8 +112,8 @@ def into_main_tables(db):
                 for i in range(len(names)):
                     members += f"{names[i]},{ids[i].upper()},{careers[i].upper()}&"
                 insert_query = f"""INSERT INTO teams 
-                (id, name, category, members, description, classes) VALUES (?, ?, ?, ?, ?, ?);"""
-                data_tuple = (counter, row[0], row[1], members, row[5], row[6])
+                (id, name, category, modality, members, description, classes) VALUES (?, ?, ?, ?, ?, ?, ?);"""
+                data_tuple = (counter, row[0], row[1], row[2], members, row[6], row[7])
                 cursor.execute(insert_query, data_tuple)
         sqliteConnection.commit()
         print("Succesfully inserted values into TEAMS table", cursor.rowcount)
