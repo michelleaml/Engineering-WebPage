@@ -8,7 +8,6 @@
 // npm install pdfjs-dist
 // npm install @react-pdf-viewer/core
 // npm i @react-pdf-viewer/default-layout
-// npm install -g create-react-app
 
 import React, {useState} from "react"
 
