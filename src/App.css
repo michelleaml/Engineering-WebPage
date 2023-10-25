@@ -138,8 +138,6 @@
   margin-right: 20px;
 }
 
-
-
 #columnas{
   column-count:1;
   column-gap:30px;
@@ -296,6 +294,7 @@ body{
   justify-content: space-between;
 
 }
+
 @media screen and (max-width: 767px) {
   .navbar-brand{
       display: none;
@@ -307,4 +306,53 @@ body{
   font-size: 18px;
   font-weight: 300px;
 
+}
+
+
+.App {
+  background-color: white;
+}
+
+.Login-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 90vh;
+}
+
+.Login-form {
+  width: 500px;
+  height: 500px;
+  box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
+  padding-top: 80px;
+  /* padding-bottom: 20px; */
+  /* padding: 20px; */
+  border-radius: 8px;
+  background-color: white;
+  text-align: center;
+}
+
+.Login-form-content {
+  padding-left: 14%;
+  padding-right: 14%;
+  
+}
+
+.Login-form-title {
+  text-align: center;
+  margin-bottom: 1em;
+  font-size: 24px;
+  color: rgb(34, 34, 34);
+  font-weight: 800;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(34, 34, 34);
+}
+
+.Login-button {
+  padding-bottom: 10px;
 }
