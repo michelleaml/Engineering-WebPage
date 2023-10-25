@@ -10,6 +10,7 @@ import Conocenos from './pages/Conocenos';
 import Layout from './pages/Layout.js';
 import Register from './pages/Register.js';
 import Voting from './pages/Vote.js';
+import Login from './pages/Login';
 
 function PrincipalNavBarDropdown() {
   return (
@@ -40,6 +41,14 @@ function PrincipalNavBarDropdown() {
             <Nav.Link as={Link} to={"/laboratorio"}>LABORATORIO</Nav.Link>
           </Nav>
         </Navbar.Collapse>
+        <Nav.Link as={Link} to="/user-login">
+            <img className="d-inline-block align-top"
+              src="./user-icon2.png"
+              alt="User Profile"
+              width="55"
+              height="55"
+            />
+          </Nav.Link>
       </Container>
     </Navbar>
     <div>
@@ -50,6 +59,7 @@ function PrincipalNavBarDropdown() {
         <Route path="/eventos/expo-ingenierias/layout" element={<Layout />}/>
         <Route path="/eventos/expo-ingenierias/registro" element={<Register />}/>
         <Route path="/eventos/expo-ingenierias/votación" element={<Voting />}/>
+        <Route path="/user-login" element={<Login />} />
 
       </Routes>
     </div>
