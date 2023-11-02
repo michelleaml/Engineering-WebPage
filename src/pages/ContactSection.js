@@ -10,6 +10,7 @@ const ContactSection = () => {
             <p className="info-titulo-footer text-center">
               ¿Tienes alguna pregunta? ¡Contáctanos!
             </p>
+            <div id="root"></div>
           </h1>
           <footer className="py-3 my-4">
             <Row>

@@ -2,7 +2,7 @@
 const express = require('express')
 
 // Import teams-controller
-const teamsRoutes = require('../../teams-controller.js')
+const teamsRoutes = require('../controllers/teams-controller')
 
 // Create router
 const router = express.Router()
