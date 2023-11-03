@@ -23,7 +23,7 @@ export const Teams = () => {
   const fetchTeams = async () => {
     // Send GET request to 'teams/all' endpoint
     axios
-      .get('http://localhost:4001/teams/all')
+      .get('http://localhost:3000/teams/all')
       .then(response => {
         // Update the teams state
         setTeams(response.data)
