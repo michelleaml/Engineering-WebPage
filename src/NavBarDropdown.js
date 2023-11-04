@@ -11,6 +11,7 @@ import Layout from './pages/Layout.js';
 import Register from './pages/Register.js';
 import Voting from './pages/Vote.js';
 import Login from './pages/Login';
+import TeamViewer from './pages/TeamViewer';
 
 function PrincipalNavBarDropdown() {
   return (
@@ -39,6 +40,7 @@ function PrincipalNavBarDropdown() {
               <NavDropdown.Item href="#eventos/3.3"> Evento 3</NavDropdown.Item> */}
             </NavDropdown>
             <Nav.Link as={Link} to={"/laboratorio"}>LABORATORIO</Nav.Link>
+            <Nav.Link as={Link} to={"/teamviewer"}>TEAMS</Nav.Link>
           </Nav>
         </Navbar.Collapse>
         <Nav.Link as={Link} to="/user-login">
@@ -60,7 +62,7 @@ function PrincipalNavBarDropdown() {
         <Route path="/eventos/expo-ingenierias/registro" element={<Register />}/>
         <Route path="/eventos/expo-ingenierias/votación" element={<Voting />}/>
         <Route path="/user-login" element={<Login />} />
-
+        <Route path="/teamviewer" element={<TeamViewer />}/>
       </Routes>
     </div>
     </Router>    
