@@ -12,6 +12,7 @@ const router = express.Router()
 // this means that '/all' translates to '/teams/all'
 router.get('/all', teamsRoutes.teamsAll)
 
+router.post('/add-points', teamsRoutes.updatePointsForEquipoDinamita)
 
 // Export router
 module.exports = router
