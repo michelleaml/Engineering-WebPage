@@ -33,17 +33,39 @@ exports.votesIA_All = async (req, res) => {
 };
 
 // Update the 'points' column for 'Equipo dinamita'
+
 exports.updatePointsForEquipoDinamita = async (req, res) => {
-  knex("votes_IA")
-    .where("team", "Equipo dinamita")
-    .update({ points: req.points }) // Set 'points' to the new value you want
+  const { points } = req.body;
+
+  if (points === undefined) {
+    return res.status(400).json({ message: 'Invalid request. Points not provided.' });
+  }
+
+  knex('votes_IA')
+    .where('team', 'Equipo dinamita')
+    .update({ points })
     .then(() => {
-      res.json({ message: "Updated points for Equipo dinamita" });
+      res.json({ message: 'Updated points for Equipo dinamita' });
     })
-    .catch((err) => {
-      res.json({ message: `Error updating points: ${err}` });
+    .catch(err => {
+      res.status(500).json({ message: `Error updating points: ${err}` });
     });
 };
+
+
+
+
+// exports.updatePointsForEquipoDinamita = async (req, res) => {
+//   knex("votes_IA")
+//     .where("team", "equipo gamma")
+//     .update({ points }) // Set 'points' to the new value you want
+//     .then(() => {
+//       res.json({ message: "Updated points for Equipo gamma" });
+//     })
+//     .catch((err) => {
+//       res.json({ message: `Error updating points: ${err}` });
+//     });
+// };
 
 // exports.updatePointsForEquipoDinamita = async (req, res) => {
 //     knex('votes_IA')
