@@ -71,7 +71,7 @@ def create_main_tables(db):
 
 
 def main():
-    db = "test.sqlite"
+    db = "server/db/database.sqlite"
     create_main_tables(db)
     input_data.main(db)
 
