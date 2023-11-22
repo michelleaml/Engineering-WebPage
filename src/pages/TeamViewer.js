@@ -1,13 +1,33 @@
-import React, { useEffect, useState } from 'react';
+
+import React, { useEffect, useState, useRef } from 'react';
+import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from 'axios';
+import $ from 'jquery';
+import 'datatables.net';
+
 
 export const TeamViewer = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
+  const tableRef = useRef(null);
 
   useEffect(() => {
     fetchTeams();
   }, []);
+  
+  useEffect(() => {
+    // Check if $ is defined (jQuery is properly loaded)
+    if ($) {
+      const dataTable = $(tableRef.current).DataTable();
+  
+      // Cleanup function
+      return () => {
+        dataTable.destroy(); // Destroy DataTable instance to avoid memory leaks
+      };
+    } else {
+      console.error('jQuery is not loaded.');
+    }
+  }, [teams]);
 
   const fetchTeams = async () => {
     axios
@@ -20,13 +40,16 @@ export const TeamViewer = () => {
   }
 
   return (
+    <Container>
+
+    
     <div>
       <h1>Team Information</h1>
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table>
-          <thead>
+        <table ref={tableRef} class="table table-striped table-bordered dataTable">
+          <thead class="thead-dark">
             <tr>
               <th>Team Name</th>
               <th>Category</th>
@@ -51,6 +74,7 @@ export const TeamViewer = () => {
         </table>
       )}
     </div>
+    </Container>
   );
 };
 
