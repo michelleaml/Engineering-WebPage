@@ -10,6 +10,7 @@
 // npm i @react-pdf-viewer/default-layout
 
 import React, {useState} from "react"
+import axios from 'axios';
 
 import { Viewer } from "@react-pdf-viewer/core";
 import {defaultLayoutPlugin} from '@react-pdf-viewer/default-layout';
@@ -49,13 +50,28 @@ function PDFViewer() {
         }
     }
 
-    const handlePdfFileSubmit=(e)=>{
+    const handlePdfFileSubmit = async (e) => {
         e.preventDefault();
-        if(pdfFile!==null){
-            setViewPdf(pdfFile);
-        }
-        else {
-            setViewPdf(null);
+        if (pdfFile !== null) {
+          try {
+            const formData = new FormData();
+            formData.append('pdfFile', pdfFile);
+      
+            // Replace 'YOUR_BACKEND_ENDPOINT' with your actual backend endpoint
+            const response = await axios.post('YOUR_BACKEND_ENDPOINT/uploadPdf', formData, {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            });
+      
+            // Handle response from the server if needed
+            console.log('PDF Uploaded!', response.data);
+          } catch (error) {
+            console.error('Error uploading PDF:', error);
+          }
+          setViewPdf(pdfFile);
+        } else {
+          setViewPdf(null);
         }
     }
 
