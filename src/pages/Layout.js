@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import PDFViewer from './PDF';
-
+import LayoutImage from "./LayoutImage.js";
 
 class Layout extends Component {
   render() {
     return (
       <div>
-        <PDFViewer />
+        <LayoutImage />
       </div>
     );
   }
