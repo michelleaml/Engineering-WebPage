@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
+import { Navigate } from 'react-router-dom';
+
 import axios from "axios";
 
 export const Login = () =>{
@@ -41,20 +43,37 @@ export const Login = () =>{
           email,
           password,
         }
-      );
-
+      ).then(res =>{
+        if(res.data.validation){
+          alert("Your password is correct, thank you for your service")
+        }
+        else{
+          alert("Your password or your email is not correct, please try again")
+        }
+      })
+    
       // Check the status code or any other criteria based on your API response
       if (response.status === 200) {
-        // Authentication successful
-        console.log("Login Successful");
+        
         // Redirect the user or update the UI accordingly
       } else {
-        // Authentication failed
-        console.log("Login Failed");
+        console.log("Login Failed - Status Code: ", response.status);
       }
     } catch (error) {
-      console.log("Error during login POST request", error);
-      // Handle error, display an error message, etc.
+      console.error("Error during login POST request", error);
+    
+      if (error.response) {
+        // The request was made and the server responded with a status code
+        console.error("Response data:", error.response.data);
+        console.error("Response status:", error.response.status);
+        console.error("Response headers:", error.response.headers);
+      } else if (error.request) {
+        // The request was made but no response was received
+        console.error("No response received:", error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error("Error setting up the request:", error.message);
+      }
     }
   };
 
