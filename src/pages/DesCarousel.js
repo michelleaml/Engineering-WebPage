@@ -9,6 +9,7 @@ function DesCarousel() {
         <Col className="column-info">
           <div className="info-principal">
             <p>
+              
               Hora de inicio: 2:00 pm
             </p>
             <p>

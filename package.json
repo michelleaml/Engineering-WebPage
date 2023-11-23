@@ -39,7 +39,7 @@
     "typescript": "^4.6.3"
   },
   "scripts": {
-    "start": "concurrently \"npm run start-server\" \"npm run start-front\" --kill-others --kill-others-on-fail",
+    "start": "npm-run-all -p start-server start-front",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

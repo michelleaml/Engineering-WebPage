@@ -148,6 +148,22 @@ def into_main_tables(db):
         sqliteConnection.commit()
         print("Succesfully inserted values into evaluators table", cursor.rowcount)
 
+        # Insert data into SUPER_USERS
+        with open("Scripts/data/Evaluadores.csv", newline="") as f:
+            reader = csv.reader(f)
+            counter = 0
+            for row in reader:
+                # [0] email
+                # [1] name
+                # [2] evaluate
+                counter += 1
+                insert_query = """INSERT INTO super_users
+                (surname, psswd) VALUES (?,?)"""
+                data_tuple = (row[0], 'supersecret')
+                cursor.execute(insert_query, data_tuple)
+        sqliteConnection.commit()
+        print("Succesfully inserted values into super users table", cursor.rowcount)
+
         cursor.close()
 
     except sqlite3.Error as error:

@@ -16,5 +16,7 @@ router.get('/all-votes-IA', teamsRoutes.votesIA_All)
 
 router.post('/add-points', teamsRoutes.updatePointsForEquipoDinamita)
 
+router.post('/login', teamsRoutes.check_username_password)
+
 // Export router
 module.exports = router

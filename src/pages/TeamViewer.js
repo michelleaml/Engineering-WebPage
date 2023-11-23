@@ -41,8 +41,7 @@ export const TeamViewer = () => {
 
   return (
     <Container>
-
-    
+   
     <div>
       <h1>Team Information</h1>
       {loading ? (
