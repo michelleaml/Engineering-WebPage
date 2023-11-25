@@ -11,7 +11,7 @@ import Layout from './pages/Layout.js';
 import Voting from './pages/Vote.js';
 import Login from './pages/Login';
 import TeamViewer from './pages/TeamViewer';
-import Post from './pages/Posting';
+// import Post from './pages/Posting';
 
 
 function PrincipalNavBarDropdown() {
