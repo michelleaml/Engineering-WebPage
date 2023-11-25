@@ -1,0 +1,40 @@
+/* styles.css */
+
+.container {
+    margin-top: 20px;
+  }
+  
+  .row {
+    margin-bottom: 20px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+  .col {
+    margin-bottom: 10px;
+  }
+  
+  .radio-label {
+    display: block;
+    cursor: pointer;
+  }
+  
+  .radio-label2 {
+    display: block;
+    cursor: pointer;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

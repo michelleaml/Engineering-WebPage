@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Col, Nav } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import axios from "axios";
+// import "../vote.css";
 
-export const Voting = () => {
+const Voting = () => {
   const [selectedValue, setSelectedValue] = useState("");
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,32 +17,24 @@ export const Voting = () => {
   }, []);
 
   const fetchTeams = async () => {
-    axios
-      .get("http://localhost:4001/teams/all-votes-IA")
-      .then((response) => {
-        setTeams(response.data);
-        setLoading(false);
-      })
-      .catch((error) =>
-        console.error(`There was an error retrieving the team list: ${error}`)
-      );
+    try {
+      const response = await axios.get("http://localhost:4001/teams/all-votes-IA");
+      setTeams(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(`There was an error retrieving the team list: ${error}`);
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // Perform the POST request with the selected value
-      const response = await axios.post(
-        "http://localhost:4001/teams/add-points",
-        {
-          points: selectedValue,
-        }
-      );
+      const response = await axios.post("http://localhost:4001/teams/add-points", {
+        points: selectedValue,
+      });
 
       fetchTeams();
-
-      // Handle the response as needed
       console.log("Points updated successfully");
     } catch (error) {
       console.log("Error during POST request:", error);
@@ -53,73 +46,63 @@ export const Voting = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <form onSubmit={handleSubmit}> 
-        <Row>
-          <h3>Radiobutton</h3>
-          <p>
-            Et assumenda fugit sint. Porro soluta unde illum ipsam totam sit
-            eveniet. Rerum qui ut qui quos et voluptates aut. Enim et id quae
-            eos vitae ratione excepturi ducimus.
-          </p>
-          <Col>
-            <label
-              tabIndex="4"
-              htmlFor="radio-1"
-              className="radio-label iconicfill-check"
-            >
-              {/* {teams.map((team) => (
-            <span key={team.id}>{teams[0].team}</span>
-          ))} */}
-              <span key={teams.id}>{teams[0].team}</span>
-            </label>
-            <br />
-          </Col>
+        <Form onSubmit={handleSubmit}>
+          <Row>
+            <Col>
+              <h3>Radiobutton</h3>
+              <p>
+                Et assumenda fugit sint. Porro soluta unde illum ipsam totam sit
+                eveniet. Rerum qui ut qui quos et voluptates aut. Enim et id quae
+                eos vitae ratione excepturi ducimus.
+              </p>
+            </Col>
 
-          <Col>
-            <input
-              type="radio"
-              name="firstRow"
-              value="25"
-              checked={selectedValue === "25"}
-              onChange={handleRadioChange}
-            ></input>
-            <label tabindex="4" for="radio-4" class="radio-label2">
-              25
-            </label>
-          </Col>
+            <Col>
+              <Form.Label className="radio-label iconicfill-check">
+                {teams[0].team}
+              </Form.Label>
+            </Col>
 
-          <Col>
-            <input
-              type="radio"
-              name="firstRow"
-              value="20"
-              checked={selectedValue === "20"}
-              onChange={handleRadioChange}
-            ></input>
-            <label tabindex="7" for="radio-1" class="radio-label">
-              20
-            </label>
-            <br />
-          </Col>
+            <Col>
+              <Form.Check
+                type="radio"
+                label="25"
+                name="firstRow"
+                value="25"
+                checked={selectedValue === "25"}
+                onChange={handleRadioChange}
+              />
+            </Col>
 
-          <Col>
-            <input
-              type="radio"
-              name="firstRow"
-              value="18"
-              checked={selectedValue === "18"}
-              onChange={handleRadioChange}
-            ></input>
-            <label tabindex="8" for="radio-1" class="radio-label">
-              18
-            </label>
-          </Col>
-          {/* Submit button */}
-          <button className="mt-3" type="submit">
-            Submmit
-          </button>
-        </Row>
-        </form>
+            <Col>
+              <Form.Check
+                type="radio"
+                label="20"
+                name="firstRow"
+                value="20"
+                checked={selectedValue === "20"}
+                onChange={handleRadioChange}
+              />
+            </Col>
+
+            <Col>
+              <Form.Check
+                type="radio"
+                label="18"
+                name="firstRow"
+                value="18"
+                checked={selectedValue === "18"}
+                onChange={handleRadioChange}
+              />
+            </Col>
+
+            <Col>
+              <button className="mt-3" type="submit">
+                Submit
+              </button>
+            </Col>
+          </Row>
+        </Form>
       )}
     </Container>
   );
