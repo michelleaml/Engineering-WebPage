@@ -14,7 +14,7 @@ def create_vote_tables(db):
             reader = csv.reader(f)
             counter = 0
             for row in reader:
-                create_query = f"""CREATE TABLE votes_{row[0]} (
+                create_query = f"""CREATE TABLE {'votes_'+row[0].lower().replace(" ","")} (
                 team TEXT NOT NULL,
                 points INTEGER NOT NULL
                 );"""
@@ -42,7 +42,7 @@ def into_vote_tables(db):
             for row in reader:
                 # [0] name
                 # [1] category
-                insert_query = f"""INSERT INTO votes_{row[1]} (
+                insert_query = f"""INSERT INTO {'votes_'+row[1].lower().replace(" ","")} (
                 team, points) VALUES (?, ?)"""
                 data_tuple = (row[0], 0)
                 cursor.execute(insert_query, data_tuple)
@@ -57,18 +57,18 @@ def into_vote_tables(db):
 
 
 def create_csvs():
-    # try:
-    excel_file = "Scripts/data/data.xlsx"
-    print("lol")
-    all_sheets = pd.read_excel(excel_file, sheet_name=None)
-    print("lol1")
-    sheets = all_sheets.keys()
-    for sheet_name in sheets:
-        sheet = pd.read_excel(excel_file, sheet_name=sheet_name, header=1)
-        sheet.to_csv("Scripts/data/%s.csv" % sheet_name, index=False)
-    print("Successfully created csv files")
-    # except:
-    print("Error creating csv files")
+    try:
+        excel_file = "Scripts/data/data.xlsx"
+        print("lol")
+        all_sheets = pd.read_excel(excel_file, sheet_name=None)
+        print("lol1")
+        sheets = all_sheets.keys()
+        for sheet_name in sheets:
+            sheet = pd.read_excel(excel_file, sheet_name=sheet_name, header=1)
+            sheet.to_csv("Scripts/data/%s.csv" % sheet_name, index=False)
+        print("Successfully created csv files")
+    except:
+        print("Error creating csv files")
 
 
 def clear_csvs():
