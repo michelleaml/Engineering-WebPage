@@ -106,7 +106,11 @@ def into_main_tables(db):
                 ids = row[4].split(",")
                 careers = row[5].split(",")
                 for i in range(len(names)):
-                    members += f"{names[i]}\n"
+                    n = names[i].split(" ")
+                    j = ""
+                    for u in range(len(n)):
+                        j+=f"{n[u].capitalize()} "
+                    members += f"{j}\n"
                 insert_query = f"""INSERT INTO teams 
                 (id, name, category, modality, members, description, classes) VALUES (?, ?, ?, ?, ?, ?, ?);"""
                 data_tuple = (counter, row[0], row[1], row[2], members, row[6], row[7])
