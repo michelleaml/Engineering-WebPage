@@ -2,7 +2,7 @@
 const path = require('path')
 
 // Get the location of database.sqlite file
-const dbPath = path.resolve(__dirname, 'db/test.sqlite')
+const dbPath = path.resolve(__dirname, 'db/database.sqlite')
 
 // Create connection to SQLite database
 const knex = require('knex')({
@@ -22,7 +22,7 @@ knex.select('*').from('teams')
   .catch(err => console.log(err))
 
 
-knex.select('*').from('super_users')
+knex.select('*').from('votes_físicayquímica')
   .then(data => console.log('data', data))
   .catch(err => console.log(err))
 // Export the database

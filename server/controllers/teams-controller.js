@@ -21,7 +21,7 @@ exports.votesIA_All = async (req, res) => {
   // Get all teams from database
   knex
     .select("*") // select all records
-    .from("votes_IA") // from 'teams' table
+    .from("votes_proyectosdeaplicación") // from 'teams' table
     .then((userData) => {
       // Send teams extracted from database in response
       res.json(userData);
@@ -56,10 +56,10 @@ exports.check_username_password = async (req, res) => {
   
   const { username, password } = req.body;
 
-  knex('super_users')
+  knex('evaluators')
     .select('*')
-    .where('surname', username)
-    .andWhere('psswd', password)
+    .where('email', username)
+    .andWhere('password', password)
     .then(rows => {
       if (rows.length > 0) {
         res.send({ validation: true });
@@ -77,7 +77,7 @@ exports.check_keys = async (req, res) => {
   // Get all teams from database
   knex
     .select("*") // select all records
-    .from("super_users") // from 'teams' table
+    .from("evaluators") // from 'teams' table
     .then((userData) => {
       // Send teams extracted from database in response
       res.json(userData);
