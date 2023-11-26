@@ -2,7 +2,7 @@
 const path = require('path')
 
 // Get the location of database.sqlite file
-const dbPath = path.resolve(__dirname, 'db/database.sqlite')
+const dbPath = path.resolve(__dirname, 'db/test.sqlite')
 
 // Create connection to SQLite database
 const knex = require('knex')({
@@ -13,11 +13,18 @@ const knex = require('knex')({
   useNullAsDefault: true
 })
 
+
+
 // Just for debugging purposes:
 // Log all data in "books" table
 knex.select('*').from('teams')
   .then(data => console.log('data:', data))
   .catch(err => console.log(err))
 
+
+knex.select('*').from('super_users')
+  .then(data => console.log('data', data))
+  .catch(err => console.log(err))
 // Export the database
 module.exports = knex
+

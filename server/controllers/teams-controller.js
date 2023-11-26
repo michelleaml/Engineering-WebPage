@@ -1,5 +1,5 @@
 // Import database
-const knex = require("../../server/db");
+const knex = require("../db.js");
 
 // Retrieve all teams
 exports.teamsAll = async (req, res) => {
@@ -52,20 +52,75 @@ exports.updatePointsForEquipoDinamita = async (req, res) => {
     });
 };
 
-
 exports.check_username_password = async (req, res) => {
+  
   const { username, password } = req.body;
 
-  const query = 'SELECT * FROM super_users WHERE surname = ? and psswd = ?';
-
-  try {
-    await knex.raw(query, [username, password]);
-    res.json({ message: `Username and password correct` });
-  } catch (err) {
-    res.json({ message: `There was an error during login: ${err}` });
-  }
+  knex('super_users')
+    .select('*')
+    .where('surname', username)
+    .andWhere('psswd', password)
+    .then(rows => {
+      if (rows.length > 0) {
+        res.send({ validation: true });
+      } else {
+        res.send({ validation: false });
+      }
+    })
+    .catch(err => {
+      throw err; // Handle the error appropriately in your application
     
-};
+  });
+}
+
+exports.check_keys = async (req, res) => {
+  // Get all teams from database
+  knex
+    .select("*") // select all records
+    .from("super_users") // from 'teams' table
+    .then((userData) => {
+      // Send teams extracted from database in response
+      res.json(userData);
+    })
+    .catch((err) => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving teams: ${err}` });
+    });
+}
+
+// exports.check_username_password = async (req, res) => {
+//   const { username, password } = req.body;
+
+//   try {
+//     const result = await knex('super_users')
+//       .where({ 'surname': username, 'psswd': password });
+    
+//     res.json(result);
+//   } catch (error) {
+//     console.error('Error checking username and password:', error);
+//     res.status(500).json({ message: 'Internal Server Error' });
+//   }
+// };
+
+
+
+
+
+
+
+// exports.check_username_password = async (req, res) => {
+
+//   const { username, password } = req.body;
+  
+//   //console.log(username);
+
+//   const query = 'SELECT * FROM super_users WHERE surname = ? and psswd = ?';
+
+ 
+//   await knex.raw(query, [username, password]);
+  
+    
+// };
 
 
 
