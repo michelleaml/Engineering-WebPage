@@ -10,11 +10,11 @@ def create_vote_tables(db):
         cursor = sqliteConnection.cursor()
         print("Successfully connected to sqlite for voting table creation")
 
-        with open("./Scripts/data/Categorias.csv", newline="") as f:
+        with open("Scripts/data/Categorias.csv", newline="") as f:
             reader = csv.reader(f)
             counter = 0
             for row in reader:
-                create_query = f"""CREATE TABLE votes_{row[0]} (
+                create_query = f"""CREATE TABLE {'votes_'+row[0].lower().replace(" ","")} (
                 team TEXT NOT NULL,
                 points INTEGER NOT NULL
                 );"""
@@ -36,13 +36,13 @@ def into_vote_tables(db):
         cursor = sqliteConnection.cursor()
         print("Successfully connected to sqlite for voting table insertion")
 
-        with open("./Scripts/data/Equipos.csv", newline="") as f:
+        with open("Scripts/data/Equipos.csv", newline="") as f:
             reader = csv.reader(f)
             counter = 0
             for row in reader:
                 # [0] name
                 # [1] category
-                insert_query = f"""INSERT INTO votes_{row[1]} (
+                insert_query = f"""INSERT INTO {'votes_'+row[1].lower().replace(" ","")} (
                 team, points) VALUES (?, ?)"""
                 data_tuple = (row[0], 0)
                 cursor.execute(insert_query, data_tuple)
@@ -58,26 +58,22 @@ def into_vote_tables(db):
 
 def create_csvs():
     try:
-        excel_file = "./Scripts/data/data.xlsx"
-        if os.path.exists("./Scripts/data/data.xlsx"):
-            print("lolazo")
-        print("lol")
+        excel_file = "Scripts/data/data.xlsx"
         all_sheets = pd.read_excel(excel_file, sheet_name=None)
-        print("lol")
         sheets = all_sheets.keys()
         for sheet_name in sheets:
             sheet = pd.read_excel(excel_file, sheet_name=sheet_name, header=1)
-            sheet.to_csv("./Scripts/data/%s.csv" % sheet_name, index=False)
+            sheet.to_csv("Scripts/data/%s.csv" % sheet_name, index=False)
         print("Successfully created csv files")
     except:
         print("Error creating csv files")
 
 
 def clear_csvs():
-    if os.path.exists("./Scripts/data/Categorias.csv"):
-        os.remove("./Scripts/data/Categorias.csv")
-        os.remove("./Scripts/data/Equipos.csv")
-        os.remove("./Scripts/data/Evaluadores.csv")
+    if os.path.exists("Scripts/data/Categorias.csv"):
+        os.remove("Scripts/data/Categorias.csv")
+        os.remove("Scripts/data/Equipos.csv")
+        os.remove("Scripts/data/Evaluadores.csv")
         print("Removed all previous csv files")
         return
     print("No csv files to remove")
@@ -92,7 +88,7 @@ def into_main_tables(db):
         print("Successfully connected to sqlite for data insertion")
 
         # Insert data into Equipos.csv
-        with open("./Scripts/data/Equipos.csv", newline="") as f:
+        with open("Scripts/data/Equipos.csv", newline="") as f:
             reader = csv.reader(f)
             counter = 0
             for row in reader:
@@ -119,7 +115,7 @@ def into_main_tables(db):
         print("Succesfully inserted values into TEAMS table", cursor.rowcount)
 
         # Insert data into CATEGORY table
-        with open("./Scripts/data/Categorias.csv", newline="") as f:
+        with open("Scripts/data/Categorias.csv", newline="") as f:
             reader = csv.reader(f)
             counter = 0
             for row in reader:
@@ -133,7 +129,7 @@ def into_main_tables(db):
         print("Succesfully inserted values into CATEGORY table", cursor.rowcount)
 
         # Insert data into EVALUATORS
-        with open("./Scripts/data/Evaluadores.csv", newline="") as f:
+        with open("Scripts/data/Evaluadores.csv", newline="") as f:
             reader = csv.reader(f)
             counter = 0
             for row in reader:
