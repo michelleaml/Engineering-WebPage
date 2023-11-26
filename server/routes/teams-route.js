@@ -14,11 +14,13 @@ router.get('/all', teamsRoutes.teamsAll)
 
 router.get('/all-votes-IA', teamsRoutes.votesIA_All)
 
-router.post('/add-points', teamsRoutes.updatePointsForEquipoDinamita)
+router.post('/add-points', teamsRoutes.updatePointsForPDA)
 
 router.post('/validatePassword', teamsRoutes.check_username_password)
 
 router.get('/all-keys', teamsRoutes.check_keys)
+
+router.get('/all-votes-teams', teamsRoutes.teams_names_category_description)
 
 // Export router
 module.exports = router

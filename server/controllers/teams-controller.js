@@ -17,6 +17,22 @@ exports.teamsAll = async (req, res) => {
     });
 };
 
+exports.teams_names_category_description = async (req, res) => {
+  // Get all teams from database
+  knex
+    .select("name","category","description") // select all records
+    .from("teams") // from 'teams' table
+    .where("category","PROYECTOS DE APLICACIÓN")
+    .then((userData) => {
+      // Send teams extracted from database in response
+      res.json(userData);
+    })
+    .catch((err) => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving teams: ${err}` });
+    });
+};
+
 exports.votesIA_All = async (req, res) => {
   // Get all teams from database
   knex
@@ -34,23 +50,43 @@ exports.votesIA_All = async (req, res) => {
 
 // Update the 'points' column for 'Equipo dinamita'
 
-exports.updatePointsForEquipoDinamita = async (req, res) => {
+exports.updatePointsForPDA = async (req, res) => {
   const { points } = req.body;
 
   if (points === undefined) {
     return res.status(400).json({ message: 'Invalid request. Points not provided.' });
   }
 
-  knex('votes_IA')
-    .where('team', 'Equipo dinamita')
-    .update({ points })
+  // Assuming you want to add the provided points to the existing points
+  knex.raw(`
+    UPDATE votes_proyectosdeaplicación
+    SET points = points + ?
+    WHERE team = 'Blue Ocean'
+  `, [points])
     .then(() => {
-      res.json({ message: 'Updated points for Equipo dinamita' });
+      res.json({ message: 'Updated points for Blue Ocean' });
     })
     .catch(err => {
       res.status(500).json({ message: `Error updating points: ${err}` });
     });
 };
+
+// exports.updatePointsForEquipoDinamita = async (req, res) => {
+//   const { points } = req.body;
+
+//   if (points === undefined) {
+//     return res.status(400).json({ message: 'Invalid request. Points not provided.' });
+//   }
+//   knex('votes_IA')
+//     .where('team', 'Equipo dinamita')
+//     .update({ points })
+//     .then(() => {
+//       res.json({ message: 'Updated points for Equipo dinamita' });
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: `Error updating points: ${err}` });
+//     });
+// };
 
 exports.check_username_password = async (req, res) => {
   

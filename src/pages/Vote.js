@@ -9,9 +9,18 @@ export const Voting = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const tableRef = useRef(null);
+  const [selectedRows, setSelectedRows] = useState([]);
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
+  };
+
+  const handleCheckboxChange = (teamId) => {
+    setSelectedRows((prevSelectedRows) => {
+      const updatedSelection = { ...prevSelectedRows };
+      updatedSelection[teamId] = !updatedSelection[teamId];
+      return updatedSelection;
+    });
   };
 
   useEffect(() => {
@@ -44,7 +53,7 @@ export const Voting = () => {
   // }
   const fetchTeams = async () => {
     axios
-      .get('http://localhost:4001/teams/all') // Replace with your actual API endpoint
+      .get('http://localhost:4001/teams/all-votes-teams') // Replace with your actual API endpoint
       .then(response => {
         setTeams(response.data);
         setLoading(false);
@@ -74,79 +83,8 @@ export const Voting = () => {
   };
 
   return (
-    // <Container>
-    //   {loading ? (
-    //     <p>Loading...</p>
-    //   ) : (
-    //     <form onSubmit={handleSubmit}> 
-    //     <Row>
-    //       <h3>Radiobutton</h3>
-    //       <p>
-    //         Et assumenda fugit sint. Porro soluta unde illum ipsam totam sit
-    //         eveniet. Rerum qui ut qui quos et voluptates aut. Enim et id quae
-    //         eos vitae ratione excepturi ducimus.
-    //       </p>
-    //       <Col>
-    //         <label
-    //           tabIndex="4"
-    //           htmlFor="radio-1"
-    //           className="radio-label iconicfill-check"
-    //         >
-    //           {/* {teams.map((team) => (
-    //         <span key={team.id}>{teams[0].team}</span>
-    //       ))} */}
-    //           <span key={teams.id}>{teams[0].team}</span>
-    //         </label>
-    //         <br />
-    //       </Col>
-
-    //       <Col>
-    //         <input
-    //           type="radio"
-    //           name="firstRow"
-    //           value="25"
-    //           checked={selectedValue === "25"}
-    //           onChange={handleRadioChange}
-    //         ></input>
-    //         <label tabindex="4" for="radio-4" class="radio-label2">
-    //           25
-    //         </label>
-    //       </Col>
-
-    //       <Col>
-    //         <input
-    //           type="radio"
-    //           name="firstRow"
-    //           value="20"
-    //           checked={selectedValue === "20"}
-    //           onChange={handleRadioChange}
-    //         ></input>
-    //         <label tabindex="7" for="radio-1" class="radio-label">
-    //           20
-    //         </label>
-    //         <br />
-    //       </Col>
-
-    //       <Col>
-    //         <input
-    //           type="radio"
-    //           name="firstRow"
-    //           value="18"
-    //           checked={selectedValue === "18"}
-    //           onChange={handleRadioChange}
-    //         ></input>
-    //         <label tabindex="8" for="radio-1" class="radio-label">
-    //           18
-    //         </label>
-    //       </Col>
-    //       {/* Submit button */}
-    //       <button className="mt-3" type="submit">
-    //         Submmit
-    //       </button>
-    //     </Row>
-    //     </form>
-    //   )}
-    // </Container>
+    
+   
     <Container>
    
     <div>
@@ -166,42 +104,34 @@ export const Voting = () => {
             </tr>
           </thead>
           <tbody>
-            {teams.map(team => (
-              <tr key={team.id}>
-                <td>{team.name}</td>
-                <td>{team.category}</td>
-                <td>{team.description}</td>
-                <td><input type="radio" name={`checkbox-${team.id}`} /></td>
-                <td><input type="radio" name={`checkbox-${team.id}`} /></td>
-                <td><input type="radio" name={`checkbox-${team.id}`} /></td>
-              </tr>
-            ))}
+              {teams.map(team => (
+                <tr key={team.id}>
+                  <td>{team.name}</td>
+                  <td>{team.category}</td>
+                  <td>{team.description}</td>
+                  <td>
+                  <input
+                      type="checkbox"
+                      value="10"
+                      checked={selectedRows[team.id] || false}
+                      onChange={() => handleCheckboxChange(team.id)}
+                  />
+                  </td>
+                  <td><input type="checkbox" /></td>
+                  <td><input type="checkbox" /></td>
+                </tr>
+              ))}
             </tbody>
         </table>
+                  // value="10"
+                  // checked={selectedValue === "10"}
+                  // onChange={handleRadioChange}
       )}
+      
           {/* Submit button */}
-          <button
-  className=""
-  type="submit"
-  style={{
-    position: 'relative',
-    display: 'block',
-    margin: '0 auto',
-    padding: '1em 1em',
-    width: '20%', // Set width to 100% to make the button wider
-    color: '#fff',
-    fontSize: '1.5em',
-    lineHeight: '1',
-    textAlign: 'center',
-    textDecoration: 'none',
-    backgroundColor: '#2da3ee',
-    border: '1px solid #0769a7',
-    borderRadius: '3px',
-    boxShadow: 'inset 0 0 7px 0 rgba(255, 255, 255, 0.5)',
-  }}
->
-  Submit
-</button>
+          <button className="mt-3" type="submit">
+             Submmit
+           </button>
     </div>
     </Container>
 
