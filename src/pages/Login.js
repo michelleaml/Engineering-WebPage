@@ -1,51 +1,113 @@
-import React, { useState } from 'react';
-import { Container, Form, Button } from 'react-bootstrap';
 
-function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Agregar la parte de autentiación del usuario aqui, API
+
+import React, { useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import ReactDOM from 'react-dom';
+import '../css/styles.css';
+import { Form, Input, Button, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import axios from "axios";
+
+const Login = () => {
+  const [teams, setKeys] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchKeys();
+  }, []);
+
+  const fetchKeys = async () => {
+    axios
+      .get("http://localhost:4001/teams/all-keys")
+      .then((response) => {
+        setKeys(response.data);
+        setLoading(false);
+      })
+      .catch((error) =>
+        console.error(`There was an error retrieving the team list: ${error}`)
+      );
+  };
+
+  const onFinish = values => {
+    const {username, password} = values
+    axios.post("http://localhost:4001/teams/validatePassword",{ username, password})
+    .then(res => {
+      if(res.data.validation){
+        
+        alert('Yor password is correct')
+
+      }else{
+
+        alert('Your password is not correct.Please try again')
+      }
+      
+    })
+    fetchKeys();
   };
 
   return (
-    // <Container className="mt-5">
-    <div className="Login-form-container">
-    <div className="Login-form ">
-      <h2>Login</h2>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="Login-form-content" controlId="email">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </Form.Group>
+    
+    <div class="d-flex justify-content-center align-items-center">
 
-        <Form.Group className="Login-form-content" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
+      <div class="w-400">
+        <h1 class="text-align-cetner mt-3">Login</h1>
+      <Form
+      name="normal_login"
+      className="login-form mt-3"
+      initialValues={{
+        remember: true,
+      }}
+      onFinish={onFinish}
+    >
+      <Form.Item
+        name="username"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Username!',
+          },
+        ]}
+      >
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+      </Form.Item>
+      <Form.Item
+        name="password"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Password!',
+          },
+        ]}
+      >
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Password"
+        />
+      </Form.Item>
+      <Form.Item>
+        <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
 
-        <Button className="Login-button" variant="primary" type="submit">
-          Login
+        <a className="login-form-forgot" href="">
+          Forgot password
+        </a>
+      </Form.Item>
+
+      <Form.Item>
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Log in
         </Button>
-      </Form>
+        Or <a href="">register now!</a>
+      </Form.Item>
+    </Form>
       </div>
-      </div>
-    /* </Container> */
+    </div>
+    
   );
-}
+};
+
 
 export default Login;
-
-

@@ -148,6 +148,8 @@ def into_main_tables(db):
         sqliteConnection.commit()
         print("Succesfully inserted values into evaluators table", cursor.rowcount)
 
+
+
         cursor.close()
 
     except sqlite3.Error as error:
