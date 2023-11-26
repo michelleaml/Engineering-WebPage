@@ -36,7 +36,8 @@ def create_main_tables(db):
         id INTEGER NOT NULL,
         email TEXT NOT NULL,
         name TEXT NOT NULL,
-        evaluate TEXT NOT NULL
+        evaluate TEXT NOT NULL,
+        password TEXT NOT NULL
         )"""
         cursor.execute(create_query)
         sqliteConnection.commit()

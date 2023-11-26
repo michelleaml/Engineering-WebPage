@@ -102,11 +102,11 @@ def into_main_tables(db):
                 # [6] Description,
                 # [7] Classes]
                 members = ""
-                names = row[2].split(",")
-                ids = row[3].split(",")
-                careers = row[4].split(",")
+                names = row[3].split(",")
+                ids = row[4].split(",")
+                careers = row[5].split(",")
                 for i in range(len(names)):
-                    members += f"{names[i]},{ids[i].upper()},{careers[i].upper()}&"
+                    members += f"{names[i]}\n"
                 insert_query = f"""INSERT INTO teams 
                 (id, name, category, modality, members, description, classes) VALUES (?, ?, ?, ?, ?, ?, ?);"""
                 data_tuple = (counter, row[0], row[1], row[2], members, row[6], row[7])
@@ -138,8 +138,8 @@ def into_main_tables(db):
                 # [2] evaluate
                 counter += 1
                 insert_query = """INSERT INTO evaluators
-                (id, email, name, evaluate) VALUES (?,?,?,?)"""
-                data_tuple = (counter, row[0], row[1], row[2])
+                (id, email, name, evaluate, password) VALUES (?,?,?,?,?)"""
+                data_tuple = (counter, row[0], row[1], row[2], 'Ev4lu4d0r3s')
                 cursor.execute(insert_query, data_tuple)
         sqliteConnection.commit()
         print("Succesfully inserted values into evaluators table", cursor.rowcount)
