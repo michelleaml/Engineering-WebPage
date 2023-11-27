@@ -5,52 +5,29 @@ import $ from 'jquery';
 import 'datatables.net';
 
 export const Voting = () => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState({});
+  const [selectedValue1, setSelectedValue1] = useState({});
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const tableRef = useRef(null);
-  const [selectedRows, setSelectedRows] = useState([]);
+  
 
   const handleRadioChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
-  const handleCheckboxChange = (teamId) => {
-    setSelectedRows((prevSelectedRows) => {
-      const updatedSelection = { ...prevSelectedRows };
-      updatedSelection[teamId] = !updatedSelection[teamId];
-      return updatedSelection;
-    });
+  const handleRadioChange1 = (event) => {
+    setSelectedValue1(event.target.value);
   };
+
+  
+  
 
   useEffect(() => {
     fetchTeams();
   }, []);
-  
-  useEffect(() => {
-    // Check if $ is defined (jQuery is properly loaded)
-    if ($) {
-      const dataTable = $(tableRef.current).DataTable();
-  
-      // Cleanup function
-      return () => {
-        dataTable.destroy(); // Destroy DataTable instance to avoid memory leaks
-      };
-    } else {
-      console.error('jQuery is not loaded.');
-    }
-  }, [teams]);
 
-  // const fetchTeams = async () => {
-  //   axios
-  //     .get("http://localhost:4001/teams/all-votes-IA")
-  //     .then((response) => {
-  //       setTeams(response.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) =>
-  //       console.error(`There was an error retrieving the team list: ${error}`));
-  // }
+  
   const fetchTeams = async () => {
     axios
       .get('http://localhost:4001/teams/all-votes-teams') // Replace with your actual API endpoint
@@ -61,6 +38,20 @@ export const Voting = () => {
       .catch(error => console.error(`There was an error retrieving the team list: ${error}`));
   }
 
+
+  const fetchTeams2 = async () => {
+    axios
+      .get("http://localhost:4001/teams/all-votes-PDA")
+      .then((response) => {
+        setTeams(response.data);
+        setLoading(false);
+      })
+      .catch((error) =>
+        console.error(`There was an error retrieving the team list: ${error}`)
+      );
+  };
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -69,11 +60,11 @@ export const Voting = () => {
       const response = await axios.post(
         "http://localhost:4001/teams/add-points",
         {
-          points: selectedValue,
+          points: selectedValue, team: teams[1].name
         }
       );
 
-      fetchTeams();
+      fetchTeams2();
 
       // Handle the response as needed
       console.log("Points updated successfully");
@@ -92,8 +83,10 @@ export const Voting = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table ref={tableRef} class="table table-striped table-bordered dataTable">
-          <thead class="thead-dark">
+        <form onSubmit={handleSubmit}>
+        <table ref={tableRef} class="table table-striped table-bordered ">
+          
+          <thead class="table-dark">
             <tr>
               <th>Nombre del equipo</th>
               <th>Categoria</th>
@@ -104,34 +97,85 @@ export const Voting = () => {
             </tr>
           </thead>
           <tbody>
-              {teams.map(team => (
-                <tr key={team.id}>
-                  <td>{team.name}</td>
-                  <td>{team.category}</td>
-                  <td>{team.description}</td>
+              
+                <tr key={teams[0].id}>
+                  <td>{teams[0].name}</td>
+                  <td>{teams[0].category}</td>
+                  <td>{teams[0].description}</td>
                   <td>
-                  <input
+                    <input
                       type="checkbox"
                       value="10"
-                      checked={selectedRows[team.id] || false}
-                      onChange={() => handleCheckboxChange(team.id)}
-                  />
+                      name={`checkbox-${teams[0].id}`}
+                      checked={selectedValue === "10"}
+                      onChange={handleRadioChange}
+                    />
                   </td>
-                  <td><input type="checkbox" /></td>
-                  <td><input type="checkbox" /></td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      value="5"
+                      name={`checkbox-${teams[0].id}`}
+                      checked={selectedValue === "5"}
+                      onChange={handleRadioChange}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      value="3"
+                      name={`checkbox-${teams[0].id}`}
+                      checked={selectedValue === "3"}
+                      onChange={handleRadioChange}
+                    />
+                  </td>
                 </tr>
-              ))}
-            </tbody>
+                <tr key={teams[1].id}>
+                  <td>{teams[1].name}</td>
+                  <td>{teams[1].category}</td>
+                  <td>{teams[1].description}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      value="10"
+                      name={`checkbox-${teams[1].id}`}
+                      checked={selectedValue1 === "10"}
+                      onChange={handleRadioChange1}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      value="5"
+                      name={`checkbox-${teams[1].id}`}
+                      checked={selectedValue1 === "5"}
+                      onChange={handleRadioChange1}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      value="3"
+                      name={`checkbox-${teams[1].id}`}
+                      checked={selectedValue1 === "3"}
+                      onChange={handleRadioChange1}
+                    />
+                  </td>
+                </tr>
+              
+            </tbody> 
         </table>
+        <button className="mt-3" type="submit">
+             Submmit
+           </button>
+        </form>
                   // value="10"
                   // checked={selectedValue === "10"}
                   // onChange={handleRadioChange}
       )}
       
-          {/* Submit button */}
-          <button className="mt-3" type="submit">
-             Submmit
-           </button>
+         
+          
     </div>
     </Container>
 

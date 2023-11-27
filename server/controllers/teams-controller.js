@@ -33,7 +33,7 @@ exports.teams_names_category_description = async (req, res) => {
     });
 };
 
-exports.votesIA_All = async (req, res) => {
+exports.votesPDA_All = async (req, res) => {
   // Get all teams from database
   knex
     .select("*") // select all records
@@ -51,7 +51,7 @@ exports.votesIA_All = async (req, res) => {
 // Update the 'points' column for 'Equipo dinamita'
 
 exports.updatePointsForPDA = async (req, res) => {
-  const { points } = req.body;
+  const { points,team } = req.body;
 
   if (points === undefined) {
     return res.status(400).json({ message: 'Invalid request. Points not provided.' });
@@ -61,10 +61,10 @@ exports.updatePointsForPDA = async (req, res) => {
   knex.raw(`
     UPDATE votes_proyectosdeaplicación
     SET points = points + ?
-    WHERE team = 'Blue Ocean'
-  `, [points])
+    WHERE team = ?
+  `, [points, team])
     .then(() => {
-      res.json({ message: 'Updated points for Blue Ocean' });
+      res.json({ message: `Updated points for ${team}` });
     })
     .catch(err => {
       res.status(500).json({ message: `Error updating points: ${err}` });
