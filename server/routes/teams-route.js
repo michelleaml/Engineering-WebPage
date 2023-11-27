@@ -12,9 +12,13 @@ const router = express.Router()
 // this means that '/all' translates to '/teams/all'
 router.get('/all', teamsRoutes.teamsAll)
 
-router.get('/all-votes-PDA', teamsRoutes.votesPDA_All)
+router.get('/all-votes-table', teamsRoutes.All_votes_tables)
 
 router.post('/add-points', teamsRoutes.updatePointsForPDA)
+
+router.post('/add-points-mt', teamsRoutes.updatePointsForMN)
+
+router.post('/add-points-sys', teamsRoutes.updatePointsForSYS)
 
 router.post('/validatePassword', teamsRoutes.check_username_password)
 

@@ -1,6 +1,3 @@
-
-
-
 import React, { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import ReactDOM from 'react-dom';
@@ -8,10 +5,13 @@ import '../css/styles.css';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [teams, setKeys] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     fetchKeys();
@@ -36,7 +36,12 @@ const Login = () => {
       if(res.data.validation){
         
         alert('Yor password is correct')
-
+        if(username === "kenia.picos@cetys.mx"){
+          navigate('/eventos/expo-ingenierias/votacion/votacion-kn');
+        }else{
+          navigate('/eventos/expo-ingenierias/layout');
+        }
+          
       }else{
 
         alert('Your password is not correct.Please try again')
