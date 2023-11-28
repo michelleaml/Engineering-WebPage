@@ -143,7 +143,7 @@ def into_main_tables(db):
                 counter += 1
                 insert_query = """INSERT INTO evaluators
                 (id, email, name, evaluate, password) VALUES (?,?,?,?,?)"""
-                data_tuple = (counter, row[0], row[1], row[2], 'Ev4lu4d0r3s')
+                data_tuple = (counter, row[0], row[1], row[2], 'EXPOING')
                 cursor.execute(insert_query, data_tuple)
         sqliteConnection.commit()
         print("Succesfully inserted values into evaluators table", cursor.rowcount)
