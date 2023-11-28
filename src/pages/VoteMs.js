@@ -84,7 +84,7 @@ export const VotingMs = () => {
 
     const fetchTeams3 = async () => {
         axios
-            .get('http://localhost:4001/teams/all-votes-teams', {
+            .get('http://expoingapi.cetys.net/teams/all-votes-teams', {
                 params: {
                     category: "POSTER"
                 }
@@ -100,7 +100,7 @@ export const VotingMs = () => {
 
     const fetchTeams4 = async () => {
         axios
-            .get("http://localhost:4001/teams/all-votes-table", {
+            .get("http://expoingapi.cetys.net/teams/all-votes-table", {
                 params: {
                     table: "votes_poster"
                 }
@@ -137,7 +137,7 @@ export const VotingMs = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://localhost:4001/teams//add-points-poster",
+                "http://expoingapi.cetys.net/teams//add-points-poster",
                 {
                     postData,
                 }

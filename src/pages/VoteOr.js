@@ -60,7 +60,7 @@ export const Voting_or = () => {
 
     const fetchTeams = async () => {
         axios
-            .get('http://localhost:4001/teams/all-votes-teams', {
+            .get('http://expoingapi.cetys.net/teams/all-votes-teams', {
                 params: {
                     category: "INTELIGENCIA ARTIFICIAL"
                 }
@@ -78,7 +78,7 @@ export const Voting_or = () => {
 
     const fetchTeams2 = async () => {
         axios
-            .get("http://localhost:4001/teams/all-votes-table", {
+            .get("http://expoingapi.cetys.net/teams/all-votes-table", {
                 params: {
                     table: "votes_inteligenciaartificial"
                 }
@@ -118,7 +118,7 @@ export const Voting_or = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://localhost:4001/teams/add-points-ai",
+                "http://expoingapi.cetys.net/teams/add-points-ai",
                 {
                     postData,
                 }

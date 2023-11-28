@@ -62,7 +62,7 @@ export const VotingNm = () => {
 
     const fetchTeams3 = async () => {
         axios
-            .get('http://localhost:4001/teams/all-votes-teams', {
+            .get('http://expoingapi.cetys.net/teams/all-votes-teams', {
                 params: {
                     category: "PROYECTOS DE APLICACIÓN"
                 }
@@ -78,7 +78,7 @@ export const VotingNm = () => {
 
     const fetchTeams4 = async () => {
         axios
-            .get("http://localhost:4001/teams/all-votes-table", {
+            .get("http://expoingapi.cetys.net/teams/all-votes-table", {
                 params: {
                     table: "votes_proyectosdeaplicación"
                 }
@@ -115,7 +115,7 @@ export const VotingNm = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://localhost:4001/teams/add-points-pda",
+                "http://expoingapi.cetys.net/teams/add-points-pda",
                 {
                     postData,
                 }

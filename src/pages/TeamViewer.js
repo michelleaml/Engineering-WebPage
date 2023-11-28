@@ -31,7 +31,7 @@ export const TeamViewer = () => {
 
   const fetchTeams = async () => {
     axios
-      .get('http://localhost:4001/teams/all') // Replace with your actual API endpoint
+      .get('http://expoingapi.cetys.net/teams/all') // Replace with your actual API endpoint
       .then(response => {
         setTeams(response.data);
         setLoading(false);
