@@ -48,7 +48,7 @@ export const TeamViewer = () => {
         <p>Loading...</p>
       ) : (
         <table ref={tableRef} class="table table-striped table-bordered dataTable">
-          <thead class="thead-dark">
+          <thead class="table-dark">
             <tr>
               <th>Team Name</th>
               <th>Category</th>

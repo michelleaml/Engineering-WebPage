@@ -16,6 +16,8 @@ export const Voting = () => {
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const tableRef = useRef(null);
+  const [selectedRows, setSelectedRows] = useState([]);
+  
   
  
 

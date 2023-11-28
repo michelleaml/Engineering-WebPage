@@ -13,6 +13,7 @@ import Voting from './pages/Vote.js';
 import Login from './pages/Login';
 import TeamViewer from './pages/TeamViewer';
 import Voting_kp from './pages/Vote_kp';
+import Results from './pages/Resultados';
 
 function PrincipalNavBarDropdown() {
   return (
@@ -34,8 +35,7 @@ function PrincipalNavBarDropdown() {
                 <NavDropdown title="EXPO Ingenierias "id="collapsible-nav-dropdown">
                 <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias"}>Inicio</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/layout"}>Layout</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/registro"}>Registro</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/votacion"}>Votación</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/votacion-resultados"}>Resultados Votación</NavDropdown.Item>
                 </NavDropdown>
               {/* <NavDropdown.Item href="#eventos/3.2"> Evento 2</NavDropdown.Item>
               <NavDropdown.Item href="#eventos/3.3"> Evento 3</NavDropdown.Item> */}
@@ -61,7 +61,7 @@ function PrincipalNavBarDropdown() {
         <Route path="/laboratorio" element={<Laboratorio />}/>
         <Route path="/eventos/expo-ingenierias/layout" element={<Layout />}/>
         <Route path="/eventos/expo-ingenierias/registro" element={<Register />}/>
-        <Route path="/eventos/expo-ingenierias/votacion" element={<Voting />}/>
+        <Route path="/eventos/expo-ingenierias/votacion-resultados" element={<Results/>}/>
         <Route path="/user-login" element={<Login />} />
         <Route path="/teamviewer" element={<TeamViewer />}/>
         <Route path="/eventos/expo-ingenierias/votacion/votacion-kn" element={<Voting_kp />}/>

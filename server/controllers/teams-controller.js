@@ -82,6 +82,35 @@ exports.updatePointsForPDA = async (req, res) => {
   }
 };
 
+// exports.updatePointsForMN = async (req, res) => {
+//   const data = req.body.postData;
+
+//   if (!Array.isArray(data) || data.length === 0) {
+//     return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+//   }
+
+//   try {
+//     const updatePromises = data.map(async ({ points, team }) => {
+//       if (points === undefined || team === undefined) {
+//         throw new Error('Invalid data. Points or team not provided.');
+//       }
+
+//       // Assuming you want to add the provided points to the existing points
+//       await knex.raw(`
+//         UPDATE votes_métodosnuméricos
+//         SET points = points + ?
+//         WHERE team = ?
+//       `, [points, team]);
+//     });
+//     console.log(postData);
+//     await Promise.all(updatePromises);
+
+//     res.json({ message: 'Points updated successfully.' });
+//   } catch (err) {
+//     res.status(500).json({ message: `Error updating points: ${err.message}` });
+//   }
+// };
+
 exports.updatePointsForMN = async (req, res) => {
   const data = req.body.postData;
 
@@ -91,16 +120,17 @@ exports.updatePointsForMN = async (req, res) => {
 
   try {
     const updatePromises = data.map(async ({ points, team }) => {
-      if (points === undefined || team === undefined) {
-        throw new Error('Invalid data. Points or team not provided.');
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_métodosnuméricos
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
       }
-
-      // Assuming you want to add the provided points to the existing points
-      await knex.raw(`
-        UPDATE votes_métodosnuméricos
-        SET points = points + ?
-        WHERE team = ?
-      `, [points, team]);
     });
 
     await Promise.all(updatePromises);
