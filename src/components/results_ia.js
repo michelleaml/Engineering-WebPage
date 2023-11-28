@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from "axios";
 import $ from 'jquery';
 import 'datatables.net';
 
 export const Results_IA = () => {
-  
+
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const tableRef = useRef(null);
-  
+
 
   useEffect(() => {
     fetchTeams();
@@ -21,7 +21,7 @@ export const Results_IA = () => {
     // Check if $ is defined (jQuery is properly loaded)
     if ($) {
       const dataTable = $(tableRef.current).DataTable();
-  
+
       // Cleanup function
       return () => {
         dataTable.destroy(); // Destroy DataTable instance to avoid memory leaks
@@ -34,9 +34,9 @@ export const Results_IA = () => {
 
   const fetchTeams = async () => {
     axios
-      .get("http://expoingapi.cetys.net/teams/all-votes-table",{
+      .get("http://localhost:4001/teams/all-votes-table", {
         params: {
-            table: "votes_inteligenciaartificial"
+          table: "votes_inteligenciaartificial"
         }
       })
       .then((response) => {
@@ -50,13 +50,13 @@ export const Results_IA = () => {
 
   return (
     <Container>
-        <div>
+      <div>
         <h2 class="text-center m-auto mb-3">INTELIGENCIA ARTIFICIAL</h2>
         {loading ? (
-            <p>Loading...</p>
-        ):(
-            
-            <table ref={tableRef} class="table table-striped table-bordered dataTable">
+          <p>Loading...</p>
+        ) : (
+
+          <table ref={tableRef} class="table table-striped table-bordered dataTable">
             <thead class="table-dark">
               <tr>
                 <th>Equipo</th>
@@ -72,10 +72,10 @@ export const Results_IA = () => {
               ))}
             </tbody>
           </table>
-                    
+
         )}
-    </div>
-    
+      </div>
+
     </Container>
 
   );

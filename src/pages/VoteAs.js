@@ -65,7 +65,7 @@ export const VotingAs = () => {
 
     const fetchTeams3 = async () => {
         axios
-            .get('http://expoingapi.cetys.net/teams/all-votes-teams', {
+            .get('http://localhost:4001/teams/all-votes-teams', {
                 params: {
                     category: "COMPETENCIA LABERINTO"
                 }
@@ -81,7 +81,7 @@ export const VotingAs = () => {
 
     const fetchTeams4 = async () => {
         axios
-            .get("http://expoingapi.cetys.net/teams/all-votes-table", {
+            .get("http://localhost:4001/teams/all-votes-table", {
                 params: {
                     table: "votes_competencialaberinto"
                 }
@@ -118,7 +118,7 @@ export const VotingAs = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://expoingapi.cetys.net/teams/add-points-cdl",
+                "http://localhost:4001/teams/add-points-cdl",
                 {
                     postData,
                 }

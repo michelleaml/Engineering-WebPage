@@ -1,16 +1,16 @@
-import React, { useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from "axios";
 import $ from 'jquery';
 import 'datatables.net';
 
 export const Results_Poster = () => {
-  
+
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const tableRef = useRef(null);
-  
+
 
   useEffect(() => {
     fetchTeams();
@@ -21,7 +21,7 @@ export const Results_Poster = () => {
     // Check if $ is defined (jQuery is properly loaded)
     if ($) {
       const dataTable = $(tableRef.current).DataTable();
-  
+
       // Cleanup function
       return () => {
         dataTable.destroy(); // Destroy DataTable instance to avoid memory leaks
@@ -34,9 +34,9 @@ export const Results_Poster = () => {
 
   const fetchTeams = async () => {
     axios
-      .get("http://expoingapi.cetys.net/teams/all-votes-table",{
+      .get("http://localhost:4001/teams/all-votes-table", {
         params: {
-            table: "votes_poster"
+          table: "votes_poster"
         }
       })
       .then((response) => {
@@ -50,16 +50,16 @@ export const Results_Poster = () => {
 
   return (
     <Container>
-        <div>
+      <div>
         <h2 class="text-center m-auto mb-3">POSTER</h2>
         {loading ? (
-            <p>Loading...</p>
-        ):(
-            
-            <table ref={tableRef} class="table table-striped table-bordered dataTable">
+          <p>Loading...</p>
+        ) : (
+
+          <table ref={tableRef} class="table table-striped table-bordered dataTable">
             <thead class="table-dark">
               <tr>
-               
+
                 <th>Equipo</th>
                 <th>Puntos</th>
               </tr>
@@ -67,17 +67,17 @@ export const Results_Poster = () => {
             <tbody>
               {teams.map(data => (
                 <tr key={data.id}>
-        
+
                   <td>{data.team}</td>
                   <td>{data.points}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-                    
+
         )}
-    </div>
-    
+      </div>
+
     </Container>
 
   );

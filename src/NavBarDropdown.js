@@ -26,7 +26,8 @@ import VotingBjs from './pages/VoteBf'
 import VotingMg from './pages/VoteMg'
 import VotingGg from './pages/VoteGg'
 import VotingMs from './pages/VoteMs'
-
+import ConexionQr from './pages/ConexionQr'
+import Inicio from './pages/Inicio'
 
 function PrincipalNavBarDropdown() {
   return (
@@ -50,6 +51,7 @@ function PrincipalNavBarDropdown() {
                   <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/layout"}>Mapa</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/votacion-resultados"}>Resultados Votación</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to={"/teamviewer"}>Proyectos</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/votacion-qr"}>Codigo QR</NavDropdown.Item>
                 </NavDropdown>
                 {/* <NavDropdown.Item href="#eventos/3.2"> Evento 2</NavDropdown.Item>
               <NavDropdown.Item href="#eventos/3.3"> Evento 3</NavDropdown.Item> */}
@@ -78,6 +80,8 @@ function PrincipalNavBarDropdown() {
           <Route path="/eventos/expo-ingenierias/votacion-resultados" element={<Results />} />
           <Route path="/user-login" element={<Login />} />
           <Route path="/teamviewer" element={<TeamViewer />} />
+          <Route path="/" element={<Inicio/>} />
+          <Route path="/eventos/expo-ingenierias/votacion-qr" element={<ConexionQr />} />
           <Route path="/eventos/expo-ingenierias/votacion/votacion-kn" element={<Voting_kp />} />
           <Route path="/eventos/expo-ingenierias/votacion/votacion-ur" element={<Voting_or />} />
           <Route path="/eventos/expo-ingenierias/votacion/votacion-ah" element={<Voting_ah />} />

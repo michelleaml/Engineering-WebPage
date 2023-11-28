@@ -4,12 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import PrincipalNavBarDropdown from './NavBarDropdown.js'
 import ContactSection from "./pages/ContactSection.js";
 
+
 function App() {
   return (
     <div className="App">
-    <PrincipalNavBarDropdown/>
+      <PrincipalNavBarDropdown />
+      
       <header className="App-header"> </header>
-      <ContactSection />
+      
     </div>
   );
 }

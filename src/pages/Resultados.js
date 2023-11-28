@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef} from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
-import axios from "axios";
+
 
 import Results_pda from "../components/results_pda"
 import Results_cl from "../components/results_cl"
@@ -15,8 +15,6 @@ export const Resultados = () => {
   
 
   return (
-    
-   
     <Container>
         <Results_pda></Results_pda>
         <Results_cl></Results_cl>
