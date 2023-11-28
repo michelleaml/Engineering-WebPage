@@ -1,10 +1,9 @@
+
 import React, { Component } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-// import EXPOIngNavegationBar from "../EXPOIngNavbar";
 import CenteredImage from './EXPOImage.js';
 import DesCarousel from "./DesCarousel.js";
 import GMapSection from '../pages/MapSection.js'
-import StaffSection from "../StaffSection.js";
 
 class EXPOIng extends Component {
   render() {
@@ -12,18 +11,14 @@ class EXPOIng extends Component {
       <div>
         <CenteredImage />
         <Container fluid>
-          <Row className="align-items-center" style={{ height: '20vh' }}>
+          <Row className="align-items-center" style={{ height: '30vh' }}>
             <Col className="col-info-presentacion">
               <div className="info-presentacion text-center">
                 <p>
                   Acompáñanos a ver la demostración de proyectos de alumnos de
-                  Ingeniería en áreas relacionadas a
+                  Ingeniería en áreas relacionadas a computación, electrónica, mecatrónica, mecánica, energías
+                  renovables, diseño gráfico digital e ingeniería industrial.
                 </p>
-                <p>
-                  computación, electrónica, mecatrónica, mecánica, energías
-                  renovables, diseño gráfico digital,
-                </p>
-                <p>e ingeniería industrial.</p>
               </div>
             </Col>
           </Row>
@@ -36,4 +31,5 @@ class EXPOIng extends Component {
 }
 
 export default EXPOIng;
+
 
