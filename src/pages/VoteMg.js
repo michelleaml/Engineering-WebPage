@@ -66,7 +66,7 @@ export const VotingMg = () => {
 
     const fetchTeams = async () => {
         axios
-            .get('http://expoingapi.cetys.net/teams/all-votes-teams', {
+            .get('https://expoingapi.cetys.net/teams/all-votes-teams', {
                 params: {
                     category: "FÍSICA Y QUÍMICA"
                 }
@@ -84,7 +84,7 @@ export const VotingMg = () => {
 
     const fetchTeams2 = async () => {
         axios
-            .get("http://expoingapi.cetys.net/teams/all-votes-table", {
+            .get("https://expoingapi.cetys.net/teams/all-votes-table", {
                 params: {
                     table: "votes_físicayquímica"
                 }
@@ -124,7 +124,7 @@ export const VotingMg = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://expoingapi.cetys.net/teams/add-points-fyq",
+                "https://expoingapi.cetys.net/teams/add-points-fyq",
                 {
                     postData,
                 }

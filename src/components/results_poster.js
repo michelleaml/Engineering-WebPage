@@ -34,7 +34,7 @@ export const Results_Poster = () => {
 
   const fetchTeams = async () => {
     axios
-      .get("http://expoingapi.cetys.net/teams/all-votes-table",{
+      .get("https://expoingapi.cetys.net/teams/all-votes-table",{
         params: {
             table: "votes_poster"
         }
