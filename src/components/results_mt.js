@@ -34,7 +34,7 @@ export const Results_MT = () => {
 
   const fetchTeams = async () => {
     axios
-      .get("https://expoingapi.cetys.net/teams/all-votes-table", {
+      .get("http://expoingapi.cetys.net/teams/all-votes-table", {
         params: {
           table: "votes_métodosnuméricos"
         }
