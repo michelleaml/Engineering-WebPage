@@ -8,12 +8,11 @@ import EXPOIng from './pages/EXPO-Ingenieria';
 import Laboratorio from './pages/Laboratorio';
 import Conocenos from './pages/Conocenos';
 import Layout from './pages/Layout.js';
-import Register from './pages/Register.js';
 import Voting from './pages/Vote.js';
 import Login from './pages/Login';
 import TeamViewer from './pages/TeamViewer';
-import Voting_kp from './pages/Vote_kp';
-import Results from './pages/Resultados';
+// import Post from './pages/Posting';
+
 
 function PrincipalNavBarDropdown() {
   return (
@@ -35,13 +34,14 @@ function PrincipalNavBarDropdown() {
                 <NavDropdown title="EXPO Ingenierias "id="collapsible-nav-dropdown">
                 <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias"}>Inicio</NavDropdown.Item>
                 <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/layout"}>Layout</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/votacion-resultados"}>Resultados Votación</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to={"/eventos/expo-ingenierias/votación"}>Votación</NavDropdown.Item>
                 </NavDropdown>
               {/* <NavDropdown.Item href="#eventos/3.2"> Evento 2</NavDropdown.Item>
               <NavDropdown.Item href="#eventos/3.3"> Evento 3</NavDropdown.Item> */}
             </NavDropdown>
             <Nav.Link as={Link} to={"/laboratorio"}>LABORATORIO</Nav.Link>
-            <Nav.Link as={Link} to={"/teamviewer"}>TEAMS</Nav.Link>
+            <Nav.Link as={Link} to={"/teamviewer"}>PROYECTOS</Nav.Link>
+            {/* <Nav.Link as={Link} to={"/post"}>POST</Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
         <Nav.Link as={Link} to="/user-login">
@@ -60,11 +60,10 @@ function PrincipalNavBarDropdown() {
         <Route path="/eventos/expo-ingenierias" element={<EXPOIng />}/>
         <Route path="/laboratorio" element={<Laboratorio />}/>
         <Route path="/eventos/expo-ingenierias/layout" element={<Layout />}/>
-        <Route path="/eventos/expo-ingenierias/registro" element={<Register />}/>
-        <Route path="/eventos/expo-ingenierias/votacion-resultados" element={<Results/>}/>
+        <Route path="/eventos/expo-ingenierias/votación" element={<Voting />}/>
         <Route path="/user-login" element={<Login />} />
         <Route path="/teamviewer" element={<TeamViewer />}/>
-        <Route path="/eventos/expo-ingenierias/votacion/votacion-kn" element={<Voting_kp />}/>
+        {/* <Route path="/post" element={<Post />}/> */}
       </Routes>
     </div>
     </Router>    
