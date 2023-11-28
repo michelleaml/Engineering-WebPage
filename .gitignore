@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-/server/db
+/server/db/database.sqlite
 # production
 /build
 
