@@ -8,12 +8,6 @@
 # testing
 /coverage
 
-#fixing PR
-server/db/database.sqlite
-package-lock.json
-src/pages/Vote.js
-
-
 # production
 /build
 package-lock.json
