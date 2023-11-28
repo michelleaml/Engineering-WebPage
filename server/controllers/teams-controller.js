@@ -17,11 +17,30 @@ exports.teamsAll = async (req, res) => {
     });
 };
 
-exports.votesIA_All = async (req, res) => {
+exports.teams_names_category_description = async (req, res) => {
+  const { category } = req.query;
+  
+  // Get all teams from database
+  knex
+    .select("name","category","description") // select all records
+    .from("teams") // from 'teams' table
+    .where("category",category)
+    .then((userData) => {
+      // Send teams extracted from database in response
+      res.json(userData);
+    })
+    .catch((err) => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving teams: ${err}` });
+    });
+};
+
+exports.All_votes_tables = async (req, res) => {
+  const { table } = req.query;
   // Get all teams from database
   knex
     .select("*") // select all records
-    .from("votes_proyectosdeaplicación") // from 'teams' table
+    .from(table) // from 'teams' table
     .then((userData) => {
       // Send teams extracted from database in response
       res.json(userData);
@@ -34,23 +53,124 @@ exports.votesIA_All = async (req, res) => {
 
 // Update the 'points' column for 'Equipo dinamita'
 
-exports.updatePointsForEquipoDinamita = async (req, res) => {
-  const { points } = req.body;
+exports.updatePointsForPDA = async (req, res) => {
+  const data = req.body.postData;
 
-  if (points === undefined) {
-    return res.status(400).json({ message: 'Invalid request. Points not provided.' });
+  if (!Array.isArray(data) || data.length === 0) {
+    return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
   }
 
-  knex('votes_IA')
-    .where('team', 'Equipo dinamita')
-    .update({ points })
-    .then(() => {
-      res.json({ message: 'Updated points for Equipo dinamita' });
-    })
-    .catch(err => {
-      res.status(500).json({ message: `Error updating points: ${err}` });
+  try {
+    const updatePromises = data.map(async ({ points, team }) => {
+      if (points === undefined || team === undefined) {
+        throw new Error('Invalid data. Points or team not provided.');
+      }
+
+      // Assuming you want to add the provided points to the existing points
+      await knex.raw(`
+        UPDATE votes_proyectosdeaplicación
+        SET points = points + ?
+        WHERE team = ?
+      `, [points, team]);
     });
+
+    await Promise.all(updatePromises);
+
+    res.json({ message: 'Points updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating points: ${err.message}` });
+  }
 };
+
+// exports.updatePointsForMN = async (req, res) => {
+//   const data = req.body.postData;
+
+//   if (!Array.isArray(data) || data.length === 0) {
+//     return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+//   }
+
+//   try {
+//     const updatePromises = data.map(async ({ points, team }) => {
+//       if (points === undefined || team === undefined) {
+//         throw new Error('Invalid data. Points or team not provided.');
+//       }
+
+//       // Assuming you want to add the provided points to the existing points
+//       await knex.raw(`
+//         UPDATE votes_métodosnuméricos
+//         SET points = points + ?
+//         WHERE team = ?
+//       `, [points, team]);
+//     });
+//     console.log(postData);
+//     await Promise.all(updatePromises);
+
+//     res.json({ message: 'Points updated successfully.' });
+//   } catch (err) {
+//     res.status(500).json({ message: `Error updating points: ${err.message}` });
+//   }
+// };
+
+exports.updatePointsForMN = async (req, res) => {
+  const data = req.body.postData;
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+  }
+
+  try {
+    const updatePromises = data.map(async ({ points, team }) => {
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_métodosnuméricos
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
+      }
+    });
+
+    await Promise.all(updatePromises);
+
+    res.json({ message: 'Points updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating points: ${err.message}` });
+  }
+};
+
+
+exports.updatePointsForSYS = async (req, res) => {
+  const data = req.body.postData;
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+  }
+
+  try {
+    const updatePromises = data.map(async ({ points, team }) => {
+      if (points === undefined || team === undefined) {
+        throw new Error('Invalid data. Points or team not provided.');
+      }
+
+      // Assuming you want to add the provided points to the existing points
+      await knex.raw(`
+        UPDATE votes_señalesysistemas
+        SET points = points + ?
+        WHERE team = ?
+      `, [points, team]);
+    });
+
+    await Promise.all(updatePromises);
+
+    res.json({ message: 'Points updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating points: ${err.message}` });
+  }
+};
+
 
 exports.check_username_password = async (req, res) => {
   
@@ -87,6 +207,45 @@ exports.check_keys = async (req, res) => {
       res.json({ message: `There was an error retrieving teams: ${err}` });
     });
 }
+
+// exports.updatePointsForPDA = async (req, res) => {
+//   const { points,team } = req.body;
+
+//   if (points === undefined) {
+//     return res.status(400).json({ message: 'Invalid request. Points not provided.' });
+//   }
+
+//   // Assuming you want to add the provided points to the existing points
+//   knex.raw(`
+//     UPDATE votes_proyectosdeaplicación
+//     SET points = points + ?
+//     WHERE team = ?
+//   `, [points, team])
+//     .then(() => {
+//       res.json({ message: `Updated points for ${team}` });
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: `Error updating points: ${err}` });
+//     });
+// };
+
+// exports.updatePointsForEquipoDinamita = async (req, res) => {
+//   const { points } = req.body;
+
+//   if (points === undefined) {
+//     return res.status(400).json({ message: 'Invalid request. Points not provided.' });
+//   }
+//   knex('votes_IA')
+//     .where('team', 'Equipo dinamita')
+//     .update({ points })
+//     .then(() => {
+//       res.json({ message: 'Updated points for Equipo dinamita' });
+//     })
+//     .catch(err => {
+//       res.status(500).json({ message: `Error updating points: ${err}` });
+//     });
+// };
+
 
 // exports.check_username_password = async (req, res) => {
 //   const { username, password } = req.body;
