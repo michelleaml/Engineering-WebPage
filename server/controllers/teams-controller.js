@@ -53,6 +53,7 @@ exports.All_votes_tables = async (req, res) => {
 
 // Update the 'points' column for 'Equipo dinamita'
 
+
 exports.updatePointsForPDA = async (req, res) => {
   const data = req.body.postData;
 
