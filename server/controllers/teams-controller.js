@@ -62,16 +62,17 @@ exports.updatePointsForPDA = async (req, res) => {
 
   try {
     const updatePromises = data.map(async ({ points, team }) => {
-      if (points === undefined || team === undefined) {
-        throw new Error('Invalid data. Points or team not provided.');
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_proyectosdeaplicación
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
       }
-
-      // Assuming you want to add the provided points to the existing points
-      await knex.raw(`
-        UPDATE votes_proyectosdeaplicación
-        SET points = points + ?
-        WHERE team = ?
-      `, [points, team]);
     });
 
     await Promise.all(updatePromises);
@@ -82,34 +83,66 @@ exports.updatePointsForPDA = async (req, res) => {
   }
 };
 
-// exports.updatePointsForMN = async (req, res) => {
-//   const data = req.body.postData;
+exports.updatePointsForFYQ = async (req, res) => {
+  const data = req.body.postData;
 
-//   if (!Array.isArray(data) || data.length === 0) {
-//     return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
-//   }
+  if (!Array.isArray(data) || data.length === 0) {
+    return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+  }
 
-//   try {
-//     const updatePromises = data.map(async ({ points, team }) => {
-//       if (points === undefined || team === undefined) {
-//         throw new Error('Invalid data. Points or team not provided.');
-//       }
+  try {
+    const updatePromises = data.map(async ({ points, team }) => {
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_físicayquímica
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
+      }
+    });
 
-//       // Assuming you want to add the provided points to the existing points
-//       await knex.raw(`
-//         UPDATE votes_métodosnuméricos
-//         SET points = points + ?
-//         WHERE team = ?
-//       `, [points, team]);
-//     });
-//     console.log(postData);
-//     await Promise.all(updatePromises);
+    await Promise.all(updatePromises);
 
-//     res.json({ message: 'Points updated successfully.' });
-//   } catch (err) {
-//     res.status(500).json({ message: `Error updating points: ${err.message}` });
-//   }
-// };
+    res.json({ message: 'Points updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating points: ${err.message}` });
+  }
+};
+
+exports.updatePointsForCDL = async (req, res) => {
+  const data = req.body.postData;
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+  }
+
+  try {
+    const updatePromises = data.map(async ({ points, team }) => {
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_competencialaberinto
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
+      }
+    });
+
+    await Promise.all(updatePromises);
+
+    res.json({ message: 'Points updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating points: ${err.message}` });
+  }
+};
+
 
 exports.updatePointsForMN = async (req, res) => {
   const data = req.body.postData;
@@ -151,16 +184,17 @@ exports.updatePointsForSYS = async (req, res) => {
 
   try {
     const updatePromises = data.map(async ({ points, team }) => {
-      if (points === undefined || team === undefined) {
-        throw new Error('Invalid data. Points or team not provided.');
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_señalesysistemas
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
       }
-
-      // Assuming you want to add the provided points to the existing points
-      await knex.raw(`
-        UPDATE votes_señalesysistemas
-        SET points = points + ?
-        WHERE team = ?
-      `, [points, team]);
     });
 
     await Promise.all(updatePromises);
@@ -170,6 +204,67 @@ exports.updatePointsForSYS = async (req, res) => {
     res.status(500).json({ message: `Error updating points: ${err.message}` });
   }
 };
+
+exports.updatePointsForIA = async (req, res) => {
+  const data = req.body.postData;
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+  }
+
+  try {
+    const updatePromises = data.map(async ({ points, team }) => {
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_inteligenciaartificial
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
+      }
+    });
+
+    await Promise.all(updatePromises);
+
+    res.json({ message: 'Points updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating points: ${err.message}` });
+  }
+};
+
+exports.updatePointsForPOS = async (req, res) => {
+  const data = req.body.postData;
+
+  if (!Array.isArray(data) || data.length === 0) {
+    return res.status(400).json({ message: 'Invalid request. Data not provided or empty array.' });
+  }
+
+  try {
+    const updatePromises = data.map(async ({ points, team }) => {
+      // Check if points and team are defined before processing the update
+      if (points !== undefined && team !== undefined) {
+        // Assuming you want to add the provided points to the existing points
+        await knex.raw(`
+          UPDATE votes_poster
+          SET points = points + ?
+          WHERE team = ?
+        `, [points, team]);
+      } else {
+        console.log('Skipping invalid data:', { points, team });
+      }
+    });
+
+    await Promise.all(updatePromises);
+
+    res.json({ message: 'Points updated successfully.' });
+  } catch (err) {
+    res.status(500).json({ message: `Error updating points: ${err.message}` });
+  }
+};
+
 
 
 exports.check_username_password = async (req, res) => {

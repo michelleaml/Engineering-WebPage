@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from "axios";
 import Swal from 'sweetalert2';
-import Voting_kp2 from "../components/vote_kp_1"
 
-export const Voting_kp = () => {
+
+export const Voting_mo = () => {
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -35,7 +35,7 @@ export const Voting_kp = () => {
     // If not selected, add the value to the column
     // If selected, remove the value from the column
     if (valueIndex === -1) {
-      if (value != 0) {
+      if (value !== 0) {
         currentSelectedValues[columnIndex] = value;
       }
       else {
@@ -547,16 +547,13 @@ export const Voting_kp = () => {
 
         )}
       </div>
-      <Voting_kp2>
-
-      </Voting_kp2>
     </Container>
 
 
 
   );
 };
-export default Voting_kp;
+export default Voting_mo;
 
 
 

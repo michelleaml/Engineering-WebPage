@@ -3,7 +3,8 @@ import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export const Voting_kp2 = () => {
+
+export const VotingBj = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -145,7 +146,7 @@ export const Voting_kp2 = () => {
     return (
         <Container>
             <div>
-                <hr></hr>
+               
                 <h2 class="text-center m-auto mb-4 mt-2">TABLA DE SEÑALES Y SISTEMAS</h2>
                 {loading ? (
                     <p>Loading...</p>
@@ -479,4 +480,7 @@ export const Voting_kp2 = () => {
         </Container>
     );
 };
-export default Voting_kp2;
+export default VotingBj;
+
+
+
