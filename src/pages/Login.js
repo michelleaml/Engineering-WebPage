@@ -19,7 +19,7 @@ const Login = () => {
 
   const fetchKeys = async () => {
     axios
-      .get("http://localhost:4001/teams/all-keys")
+      .get("https://expoingapi.cetys.net/teams/all-keys")
       .then((response) => {
         setKeys(response.data);
         setLoading(false);
@@ -31,7 +31,7 @@ const Login = () => {
 
   const onFinish = values => {
     const { username, password } = values
-    axios.post("http://localhost:4001/teams/validatePassword", { username, password })
+    axios.post("https://expoingapi.cetys.net/teams/validatePassword", { username, password })
       .then(res => {
         if (res.data.validation) {
 

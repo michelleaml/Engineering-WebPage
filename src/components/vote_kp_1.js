@@ -60,7 +60,7 @@ export const Voting_kp2 = () => {
 
     const fetchTeams3 = async () => {
         axios
-            .get('http://localhost:4001/teams/all-votes-teams', {
+            .get('https://expoingapi.cetys.net/teams/all-votes-teams', {
                 params: {
                     category: "SEÑALES Y SISTEMAS"
                 }
@@ -76,7 +76,7 @@ export const Voting_kp2 = () => {
 
     const fetchTeams4 = async () => {
         axios
-            .get("http://localhost:4001/teams/all-votes-table", {
+            .get("https://expoingapi.cetys.net/teams/all-votes-table", {
                 params: {
                     table: "votes_señalesysistemas"
                 }
@@ -113,7 +113,7 @@ export const Voting_kp2 = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://localhost:4001/teams/add-points-sys",
+                "https://expoingapi.cetys.net/teams/add-points-sys",
                 {
                     postData,
                 }
