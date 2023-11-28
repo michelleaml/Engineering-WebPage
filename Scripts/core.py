@@ -36,7 +36,8 @@ def create_main_tables(db):
         id INTEGER NOT NULL,
         email TEXT NOT NULL,
         name TEXT NOT NULL,
-        evaluate TEXT NOT NULL
+        evaluate TEXT NOT NULL,
+        password TEXT NOT NULL
         )"""
         cursor.execute(create_query)
         sqliteConnection.commit()
@@ -71,7 +72,7 @@ def create_main_tables(db):
 
 
 def main():
-    db = "test.sqlite"
+    db = "server/db/database.sqlite"
     create_main_tables(db)
     input_data.main(db)
 

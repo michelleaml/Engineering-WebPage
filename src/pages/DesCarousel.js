@@ -8,9 +8,26 @@ function DesCarousel() {
         <Col sm={12} md={6} className="order-md-1 order-2">
           <hr className="hr hr-blurry" />
           <div className="info-principal">
+<<<<<<< HEAD
             <p>Hora de inicio: 2:00 pm</p>
             <p>Hora de finalización: 6:00 pm</p>
             <p className="mt-4">El evento está dirigido a estudiantes, profesores y público general.</p>
+=======
+            <p>
+              
+              Hora de inicio: 2:00 pm
+            </p>
+            <p>
+              Hora de finalización: 6:00 pm
+            </p>
+            <p>              </p>
+            <p>          </p>
+            <p className="mt-4">
+              El evento está dirigido a estudiantes, profesores y público general.
+            </p>
+            <p></p>
+            <p></p>
+>>>>>>> develop
           </div>
         </Col>
         <Col sm={12} md={6} className="order-md-2 order-1">
