@@ -12,19 +12,18 @@ export const Voting_kp = () => {
 
 
   const [selectedValues, setSelectedValues] = useState({
-    0: null,
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    7: null,
-    8: null,
-    9: null,
-    10: null,
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0,
+    9: 0,
+    10: 0,
   });
-
 
   const handleRadioChange = (columnIndex, value) => {
     // Get the current selected values for the column
@@ -36,7 +35,12 @@ export const Voting_kp = () => {
     // If not selected, add the value to the column
     // If selected, remove the value from the column
     if (valueIndex === -1) {
-      currentSelectedValues[columnIndex] = value;
+      if (value != 0) {
+        currentSelectedValues[columnIndex] = value;
+      }
+      else {
+        currentSelectedValues[columnIndex] = 0;
+      }
     } else {
       currentSelectedValues[columnIndex] = 0;
     }
@@ -49,42 +53,8 @@ export const Voting_kp = () => {
 
   };
 
-  // const handleRadioChange = (columnIndex, value) => {
-  //   // Get the current selected values for the column
-  //   const currentSelectedValues = [...selectedValues];
-
-  //   // Check if the value is already selected for the current column
-  //   const valueIndex = currentSelectedValues[columnIndex] === value ? columnIndex : -1;
-
-  //   // If not selected, add the value to the column
-  //   // If selected, remove the value from the column
-  //   if (valueIndex === -1) {
-  //     currentSelectedValues[columnIndex] = value;
-  //   } else {
-  //     currentSelectedValues[columnIndex] = null;
-  //   }
-
-  //   // Set unselected values to 0
-  //   currentSelectedValues.forEach((val, index) => {
-  //     if (val === null) {
-  //       currentSelectedValues[index] = 0;
-  //     }
-  //   });
-
-  //   // Filter out null values and keep only the first three selections for each column
-  //   const filteredSelectedValues = currentSelectedValues
-  //     .filter((val, index) => val !== null && index <= 2);
-
-  //   // Update the state with the new selected values
-  //   setSelectedValues(currentSelectedValues);
-
-  //   // If you want to see the selected values in the console
-  //   // console.log(filteredSelectedValues);
-  // };
-
   useEffect(() => {
     fetchTeams();
-
   }, []);
 
   const fetchTeams = async () => {
@@ -96,8 +66,8 @@ export const Voting_kp = () => {
       })
       .then(response => {
         setTeams(response.data);
-        setSelectedValues(Array.from({ length: response.data.length }, () => [null, null, null]));
-        setLoading(false);
+        setSelectedValues(Array.from({ length: response.data.length }, () => 0));
+        setLoading(false)
       })
       .catch(error => console.error(`There was an error retrieving the team list: ${error}`));
   }
@@ -132,15 +102,9 @@ export const Voting_kp = () => {
     if (formSubmitted) {
       return;
     }
-    // for (let i = 0; i <= 2; i++) {
-    //   postData.push({
-    //     points: eval(selectedValues[i]),
-    //     team: teams[i]?.name, // Adjust index as per your requirements, and use optional chaining
-    //   });
-    // }
 
-    for (let i = 0; i <= 11; i++) {
-      const points = selectedValues[i];
+    for (let i = 0; i <= 10; i++) {
+      const points = selectedValues[i] !== null ? selectedValues[i] : 0;
       const teamName = teams[i]?.name;
 
       postData.push({
@@ -156,10 +120,9 @@ export const Voting_kp = () => {
         "http://localhost:4001/teams/add-points-mt",
         {
           postData,
-
         }
       );
-
+      console.log(postData);
       fetchTeams2();
 
       Swal.fire({
