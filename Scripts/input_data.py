@@ -16,7 +16,7 @@ def create_vote_tables(db):
             for row in reader:
                 create_query = f"""CREATE TABLE {'votes_'+row[0].lower().replace(" ","")} (
                 team TEXT NOT NULL,
-                points INTEGER NOT NULL
+                points INTEGER 
                 );"""
                 cursor.execute(create_query)
                 print(f"Succesfully created {row[0]} table")

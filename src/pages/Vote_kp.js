@@ -38,14 +38,8 @@ export const Voting_kp = () => {
     if (valueIndex === -1) {
       currentSelectedValues[columnIndex] = value;
     } else {
-      currentSelectedValues[columnIndex] = null;
+      currentSelectedValues[columnIndex] = 0;
     }
-    currentSelectedValues.forEach((val, index) => {
-      if (val === null) {
-        currentSelectedValues[index] = 0;
-      }
-    });
-
     // Filter out null values and keep only the first three selections for each column
     const filteredSelectedValues = currentSelectedValues
       .filter((val, index) => val !== null && index <= 2);
