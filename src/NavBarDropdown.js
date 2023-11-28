@@ -8,11 +8,24 @@ import EXPOIng from './pages/EXPO-Ingenieria';
 import Laboratorio from './pages/Laboratorio';
 import Conocenos from './pages/Conocenos';
 import Layout from './pages/Layout.js';
-import Voting from './pages/Vote.js';
 import Login from './pages/Login';
 import TeamViewer from './pages/TeamViewer';
-import Voting_kp from './pages/Vote_kp';
+import Voting_kp from './pages/VoteKp';
 import Results from './pages/Resultados';
+import Voting_or from './pages/VoteOr';
+import Voting_ah from './pages/VoteAh';
+import Voting_vm from './pages/VoteVm';
+import Voting_fa from './pages/VoteFa'
+import Voting_mo from './pages/VoteMo'
+import Voting_ma from './pages/VoteMa'
+import Voting_xa from './pages/VoteXa'
+import Voting_jc from './pages/VoteJc'
+import VotingNm from './pages/VoteNm'
+import VotingAs from './pages/VoteAs'
+import VotingBjs from './pages/VoteBf'
+import VotingMg from './pages/VoteMg'
+import VotingGg from './pages/VoteGg'
+import VotingMs from './pages/VoteMs'
 
 
 function PrincipalNavBarDropdown() {
@@ -42,7 +55,7 @@ function PrincipalNavBarDropdown() {
               <NavDropdown.Item href="#eventos/3.3"> Evento 3</NavDropdown.Item> */}
               </NavDropdown>
               <Nav.Link as={Link} to={"/laboratorio"}>LABORATORIO</Nav.Link>
-              
+
               {/* <Nav.Link as={Link} to={"/post"}>POST</Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
@@ -66,7 +79,20 @@ function PrincipalNavBarDropdown() {
           <Route path="/user-login" element={<Login />} />
           <Route path="/teamviewer" element={<TeamViewer />} />
           <Route path="/eventos/expo-ingenierias/votacion/votacion-kn" element={<Voting_kp />} />
-
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-ur" element={<Voting_or />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-ah" element={<Voting_ah />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-vm" element={<Voting_vm />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-fa" element={<Voting_fa />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-mo" element={<Voting_mo />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-ma" element={<Voting_ma />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-xa" element={<Voting_xa />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-jc" element={<Voting_jc />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-nm" element={<VotingNm />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-as" element={<VotingAs />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-bf" element={<VotingBjs />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-mg" element={<VotingMg />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-gg" element={<VotingGg />} />
+          <Route path="/eventos/expo-ingenierias/votacion/votacion-ms" element={<VotingMs />} />
         </Routes>
       </div>
     </Router>

@@ -3,7 +3,8 @@ import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export const Voting_kp2 = () => {
+
+export const Voting_fa = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ export const Voting_kp2 = () => {
         6: 0,
         7: 0,
         8: 0,
+        9: 0,
     });
 
     const handleRadioChange = (columnIndex, value) => {
@@ -33,7 +35,7 @@ export const Voting_kp2 = () => {
         // If not selected, add the value to the column
         // If selected, remove the value from the column
         if (valueIndex === -1) {
-            if (value != 0) {
+            if (value !== 0) {
                 currentSelectedValues[columnIndex] = value;
             }
             else {
@@ -62,7 +64,7 @@ export const Voting_kp2 = () => {
         axios
             .get('http://localhost:4001/teams/all-votes-teams', {
                 params: {
-                    category: "SEÑALES Y SISTEMAS"
+                    category: "PROYECTOS DE APLICACIÓN"
                 }
             })
             .then(response => {
@@ -78,7 +80,7 @@ export const Voting_kp2 = () => {
         axios
             .get("http://localhost:4001/teams/all-votes-table", {
                 params: {
-                    table: "votes_señalesysistemas"
+                    table: "votes_proyectosdeaplicación"
                 }
             })
             .then((response) => {
@@ -99,7 +101,7 @@ export const Voting_kp2 = () => {
             return;
         }
 
-        for (let i = 0; i <= 8; i++) {
+        for (let i = 0; i <= 9; i++) {
             const points = selectedValues[i];
             const teamName = teams[i]?.name;
 
@@ -113,7 +115,7 @@ export const Voting_kp2 = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://localhost:4001/teams/add-points-sys",
+                "http://localhost:4001/teams/add-points-pda",
                 {
                     postData,
                 }
@@ -145,8 +147,7 @@ export const Voting_kp2 = () => {
     return (
         <Container>
             <div>
-                <hr></hr>
-                <h2 class="text-center m-auto mb-4 mt-2">TABLA DE SEÑALES Y SISTEMAS</h2>
+                <h2 class="text-center m-auto mb-4 mt-2">TABLA DE PROYECTOS DE APLICACIÓN</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
@@ -453,6 +454,38 @@ export const Voting_kp2 = () => {
                                         />
                                     </td>
                                 </tr>
+                                <tr key={teams[9].id}>
+                                    <td>{teams[9].name}</td>
+                                    <td>{teams[9].category}</td>
+                                    <td>{teams[9].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "10"}
+                                            onChange={() => handleRadioChange(9, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "5"}
+                                            onChange={() => handleRadioChange(9, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "3"}
+                                            onChange={() => handleRadioChange(9, "3")}
+                                        />
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -479,4 +512,7 @@ export const Voting_kp2 = () => {
         </Container>
     );
 };
-export default Voting_kp2;
+export default Voting_fa;
+
+
+

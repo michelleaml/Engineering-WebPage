@@ -3,12 +3,12 @@ import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from "axios";
 import Swal from 'sweetalert2';
 
-export const Voting_kp2 = () => {
+
+export const Voting_or = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
     const tableRef = useRef(null);
-
 
 
     const [selectedValues, setSelectedValues] = useState({
@@ -21,6 +21,9 @@ export const Voting_kp2 = () => {
         6: 0,
         7: 0,
         8: 0,
+        9: 0,
+        10: 0,
+
     });
 
     const handleRadioChange = (columnIndex, value) => {
@@ -33,7 +36,7 @@ export const Voting_kp2 = () => {
         // If not selected, add the value to the column
         // If selected, remove the value from the column
         if (valueIndex === -1) {
-            if (value != 0) {
+            if (value !== 0) {
                 currentSelectedValues[columnIndex] = value;
             }
             else {
@@ -51,34 +54,33 @@ export const Voting_kp2 = () => {
 
     };
 
-
     useEffect(() => {
-        fetchTeams3();
+        fetchTeams();
     }, []);
 
-
-
-    const fetchTeams3 = async () => {
+    const fetchTeams = async () => {
         axios
             .get('http://localhost:4001/teams/all-votes-teams', {
                 params: {
-                    category: "SEÑALES Y SISTEMAS"
+                    category: "INTELIGENCIA ARTIFICIAL"
                 }
             })
             .then(response => {
                 setTeams(response.data);
                 setSelectedValues(Array.from({ length: response.data.length }, () => 0));
-
-                setLoading(false);
+                setLoading(false)
             })
             .catch(error => console.error(`There was an error retrieving the team list: ${error}`));
-    };
+    }
 
-    const fetchTeams4 = async () => {
+
+
+
+    const fetchTeams2 = async () => {
         axios
             .get("http://localhost:4001/teams/all-votes-table", {
                 params: {
-                    table: "votes_señalesysistemas"
+                    table: "votes_inteligenciaartificial"
                 }
             })
             .then((response) => {
@@ -89,18 +91,21 @@ export const Voting_kp2 = () => {
                 console.error(`There was an error retrieving the team list: ${error}`));
     };
 
-    const handleSubmit2 = async (event) => {
+
+
+
+    const handleSubmit = async (event) => {
+
         const postData = [];
 
         event.preventDefault();
-
 
         if (formSubmitted) {
             return;
         }
 
-        for (let i = 0; i <= 8; i++) {
-            const points = selectedValues[i];
+        for (let i = 0; i <= 11; i++) {
+            const points = selectedValues[i] !== null ? selectedValues[i] : 0;
             const teamName = teams[i]?.name;
 
             postData.push({
@@ -113,13 +118,14 @@ export const Voting_kp2 = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://localhost:4001/teams/add-points-sys",
+                "http://localhost:4001/teams/add-points-ai",
                 {
                     postData,
                 }
             );
             console.log(postData);
-            fetchTeams4();
+            fetchTeams2();
+
             Swal.fire({
                 icon: 'success',
                 title: 'Puntos Actualizados',
@@ -136,21 +142,21 @@ export const Voting_kp2 = () => {
             });
             console.log("Error during POST request:", error);
         }
-        fetchTeams3();
+        fetchTeams();
 
     };
 
 
-
     return (
+
+
         <Container>
             <div>
-                <hr></hr>
-                <h2 class="text-center m-auto mb-4 mt-2">TABLA DE SEÑALES Y SISTEMAS</h2>
+                <h2 class="text-center m-auto mb-3">TABLA DE INTELIGENCIA ARTIFICIAL</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
-                    <form onSubmit={handleSubmit2}>
+                    <form onSubmit={handleSubmit}>
 
                         <table ref={tableRef} class="table table-striped table-bordered ">
 
@@ -453,6 +459,102 @@ export const Voting_kp2 = () => {
                                         />
                                     </td>
                                 </tr>
+                                <tr key={teams[9].id}>
+                                    <td>{teams[9].name}</td>
+                                    <td>{teams[9].category}</td>
+                                    <td>{teams[9].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "10"}
+                                            onChange={() => handleRadioChange(9, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "5"}
+                                            onChange={() => handleRadioChange(9, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "3"}
+                                            onChange={() => handleRadioChange(9, "3")}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr key={teams[10].id}>
+                                    <td>{teams[10].name}</td>
+                                    <td>{teams[10].category}</td>
+                                    <td>{teams[10].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[10].id}`}
+                                            checked={selectedValues[10] === "10"}
+                                            onChange={() => handleRadioChange(10, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[10].id}`}
+                                            checked={selectedValues[10] === "5"}
+                                            onChange={() => handleRadioChange(10, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[10].id}`}
+                                            checked={selectedValues[10] === "3"}
+                                            onChange={() => handleRadioChange(10, "3")}
+                                        />
+                                    </td>
+                                </tr>
+                                {/* <tr key={teams[11].id}>
+                                    <td>{teams[11].name}</td>
+                                    <td>{teams[11].category}</td>
+                                    <td>{teams[11].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[11].id}`}
+                                            checked={selectedValues[11] === "10"}
+                                            onChange={() => handleRadioChange(11, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[11].id}`}
+                                            checked={selectedValues[11] === "5"}
+                                            onChange={() => handleRadioChange(11, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[11].id}`}
+                                            checked={selectedValues[11] === "3"}
+                                            onChange={() => handleRadioChange(11, "3")}
+                                        />
+                                    </td>
+                                </tr> */}
                             </tbody>
                         </table>
 
@@ -469,14 +571,22 @@ export const Voting_kp2 = () => {
                                     border: 'none',
                                     borderRadius: '8px',
                                     cursor: 'pointer'
-                                }}>
-                                Submmit
+                                }}
+                            >
+                                Submit
                             </button>
                         )}
                     </form>
+
                 )}
             </div>
         </Container>
+
+
+
     );
 };
-export default Voting_kp2;
+export default Voting_or;
+
+
+

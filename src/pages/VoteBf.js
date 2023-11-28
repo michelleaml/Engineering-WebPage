@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Nav } from "react-bootstrap";
 import axios from "axios";
 import Swal from 'sweetalert2';
+import VotingBj from "../components/voteBf"
 
-export const Voting_kp2 = () => {
+export const VotingBjs = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -21,6 +22,10 @@ export const Voting_kp2 = () => {
         6: 0,
         7: 0,
         8: 0,
+        9: 0,
+        10: 0,
+        11: 0,
+        12: 0,
     });
 
     const handleRadioChange = (columnIndex, value) => {
@@ -33,7 +38,7 @@ export const Voting_kp2 = () => {
         // If not selected, add the value to the column
         // If selected, remove the value from the column
         if (valueIndex === -1) {
-            if (value != 0) {
+            if (value !== 0) {
                 currentSelectedValues[columnIndex] = value;
             }
             else {
@@ -62,7 +67,7 @@ export const Voting_kp2 = () => {
         axios
             .get('http://localhost:4001/teams/all-votes-teams', {
                 params: {
-                    category: "SEÑALES Y SISTEMAS"
+                    category: "COMPETENCIA LABERINTO"
                 }
             })
             .then(response => {
@@ -78,7 +83,7 @@ export const Voting_kp2 = () => {
         axios
             .get("http://localhost:4001/teams/all-votes-table", {
                 params: {
-                    table: "votes_señalesysistemas"
+                    table: "votes_competencialaberinto"
                 }
             })
             .then((response) => {
@@ -99,7 +104,7 @@ export const Voting_kp2 = () => {
             return;
         }
 
-        for (let i = 0; i <= 8; i++) {
+        for (let i = 0; i <= 12; i++) {
             const points = selectedValues[i];
             const teamName = teams[i]?.name;
 
@@ -113,7 +118,7 @@ export const Voting_kp2 = () => {
         try {
             // Perform the POST request with the selected value
             const response = await axios.post(
-                "http://localhost:4001/teams/add-points-sys",
+                "http://localhost:4001/teams/add-points-cdl",
                 {
                     postData,
                 }
@@ -145,8 +150,7 @@ export const Voting_kp2 = () => {
     return (
         <Container>
             <div>
-                <hr></hr>
-                <h2 class="text-center m-auto mb-4 mt-2">TABLA DE SEÑALES Y SISTEMAS</h2>
+                <h2 class="text-center m-auto mb-4 mt-2">TABLA DE COMPETENCIA LABERINTO</h2>
                 {loading ? (
                     <p>Loading...</p>
                 ) : (
@@ -453,6 +457,134 @@ export const Voting_kp2 = () => {
                                         />
                                     </td>
                                 </tr>
+                                <tr key={teams[9].id}>
+                                    <td>{teams[9].name}</td>
+                                    <td>{teams[9].category}</td>
+                                    <td>{teams[9].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "10"}
+                                            onChange={() => handleRadioChange(9, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "5"}
+                                            onChange={() => handleRadioChange(9, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[9].id}`}
+                                            checked={selectedValues[9] === "3"}
+                                            onChange={() => handleRadioChange(9, "3")}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr key={teams[10].id}>
+                                    <td>{teams[10].name}</td>
+                                    <td>{teams[10].category}</td>
+                                    <td>{teams[10].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[10].id}`}
+                                            checked={selectedValues[10] === "10"}
+                                            onChange={() => handleRadioChange(10, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[10].id}`}
+                                            checked={selectedValues[10] === "5"}
+                                            onChange={() => handleRadioChange(10, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[10].id}`}
+                                            checked={selectedValues[10] === "3"}
+                                            onChange={() => handleRadioChange(10, "3")}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr key={teams[11].id}>
+                                    <td>{teams[11].name}</td>
+                                    <td>{teams[11].category}</td>
+                                    <td>{teams[11].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[11].id}`}
+                                            checked={selectedValues[11] === "10"}
+                                            onChange={() => handleRadioChange(11, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[11].id}`}
+                                            checked={selectedValues[11] === "5"}
+                                            onChange={() => handleRadioChange(11, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[11].id}`}
+                                            checked={selectedValues[11] === "3"}
+                                            onChange={() => handleRadioChange(11, "3")}
+                                        />
+                                    </td>
+                                </tr>
+                                <tr key={teams[12].id}>
+                                    <td>{teams[12].name}</td>
+                                    <td>{teams[12].category}</td>
+                                    <td>{teams[12].description}</td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="10"
+                                            name={`checkbox-${teams[12].id}`}
+                                            checked={selectedValues[12] === "10"}
+                                            onChange={() => handleRadioChange(12, "10")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="5"
+                                            name={`checkbox-${teams[12].id}`}
+                                            checked={selectedValues[12] === "5"}
+                                            onChange={() => handleRadioChange(12, "5")}
+                                        />
+                                    </td>
+                                    <td>
+                                        <input
+                                            type="checkbox"
+                                            value="3"
+                                            name={`checkbox-${teams[12].id}`}
+                                            checked={selectedValues[12] === "3"}
+                                            onChange={() => handleRadioChange(12, "3")}
+                                        />
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
 
@@ -476,7 +608,12 @@ export const Voting_kp2 = () => {
                     </form>
                 )}
             </div>
+            <VotingBj></VotingBj>
         </Container>
+        
     );
 };
-export default Voting_kp2;
+export default VotingBjs;
+
+
+

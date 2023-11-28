@@ -23,3 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 /ing_proj/
+
+
+/server/db/database.sqlite
+package-lock.json
