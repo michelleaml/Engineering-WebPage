@@ -19,7 +19,7 @@ const Login = () => {
 
   const fetchKeys = async () => {
     axios
-      .get("https://expoingapi.cetys.net/teams/all-keys")
+      .get("http://localhost:4001/teams/all-keys")
       .then((response) => {
         setKeys(response.data);
         setLoading(false);
@@ -31,7 +31,7 @@ const Login = () => {
 
   const onFinish = values => {
     const { username, password } = values
-    axios.post("https://expoingapi.cetys.net/teams/validatePassword", { username, password })
+    axios.post("http://localhost:4001/teams/validatePassword", { username, password })
       .then(res => {
         if (res.data.validation) {
 
@@ -69,7 +69,7 @@ const Login = () => {
           }
 
           else {
-            navigate('/eventos/expo-ingenierias');
+            navigate('/eventos/expo-ingenierias/votacion/error');
           }
 
         } else {
@@ -130,10 +130,10 @@ const Login = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button ">
+            <Button type="primary" htmlType="submit" className="login-form-button mb-3">
               Log in
             </Button>
-            Or <a href="./PageNotFound.html" >Registrate!</a>
+            Or <a href="./eventos/expo-ingenierias/registro" >Registrate!</a>
           </Form.Item>
         </Form>
       </div>
