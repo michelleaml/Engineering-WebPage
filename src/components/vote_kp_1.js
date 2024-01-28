@@ -12,15 +12,7 @@ export const Voting_kp2 = () => {
 
 
     const [selectedValues, setSelectedValues] = useState({
-        0: 0,
-        1: 0,
-        2: 0,
-        3: 0,
-        4: 0,
-        5: 0,
-        6: 0,
-        7: 0,
-        8: 0,
+
     });
 
     const handleRadioChange = (columnIndex, value) => {
@@ -186,24 +178,23 @@ export const Voting_kp2 = () => {
                     <form onSubmit={handleSubmit2}>
 
                         <table class="table table-striped table-bordered">
-                        {/* Table headers */}
-                        <thead class="table-dark">
-                            <tr>
-                            <th>Nombre del Equipo</th>
-                            <th>Categoria</th>
-                            <th>Descripcion</th>
-                            <th>10 puntos</th>
-                            <th>5 puntos</th>
-                            <th>3 puntos</th>
-                            </tr>
-                        </thead>
-                        {/* Table body */}
-                        <tbody>
-                            {teams.map((team, index) => renderTableRow(team, index))}
-                        </tbody>
+                            {/* Table headers */}
+                            <thead class="table-dark">
+                                <tr>
+                                <th>Nombre del Equipo</th>
+                                <th>Categoria</th>
+                                <th>Descripción</th>
+                                <th>10 puntos</th>
+                                <th>5 puntos</th>
+                                <th>3 puntos</th>
+                                </tr>
+                            </thead>
+                            {/* Table body */}
+                            <tbody>
+                                {teams.map((team, index) => renderTableRow(team, index))}
+                            </tbody>
                         </table>
                     
-
                         {!formSubmitted && (
                             <button
                                 className="mt-3 mb-3"

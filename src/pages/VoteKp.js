@@ -12,17 +12,6 @@ export const Voting_kp = () => {
 
 
   const [selectedValues, setSelectedValues] = useState({
-    0: 0,
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
   });
 
   const handleRadioChange = (columnIndex, value) => {
@@ -234,6 +223,8 @@ export const Voting_kp = () => {
 
         )}
       </div>
+
+      {/* Second Table on Website */}
       <Voting_kp2>
 
       </Voting_kp2>
